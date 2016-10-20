@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.bumblebeem.android.bumblebeem.GameActivity">
+
+    <RelativeLayout
+        android:id="@+id/everything_else_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/countdown_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@xml/countdown_circle"
+            android:gravity="center"
+            android:minHeight="100dp"
+            android:minWidth="100dp"
+            android:text="0"
+            android:textSize="56sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/countdown_textView"
+            android:orientation="horizontal"
+            android:paddingTop="20dp">
+
+
+            <ImageButton
+                android:id="@+id/replay_button"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:background="@xml/selector"
+                android:src="@xml/ic_replay_icon"
+                android:layout_gravity="center"/>
+
+            <com.bumblebeem.android.bumblebeem.CustomEditText
+                android:id="@+id/editText"
+                android:textStyle="bold"
+                android:textSize="34sp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:imeOptions="flagNoExtractUi"
+                android:inputType="textNoSuggestions|textVisiblePassword"
+                android:padding="20dp"
+                tools:text="Wesh"
+                android:gravity="center_horizontal"/>
+
+            <ImageButton
+                android:id="@+id/skip_button"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:background="@xml/selector"
+                android:src="@xml/ic_skip_next_icon"
+                android:layout_gravity="center"/>
+
+
+        </LinearLayout>
+
+        <Button
+            android:text="Results"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linearLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="29dp"
+            android:id="@+id/results_button" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

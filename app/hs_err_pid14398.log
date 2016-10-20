@@ -1,0 +1,553 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x00007f091f14835d, pid=14398, tid=0x00007f092045d700
+#
+# JRE version:  (8.0_76-b03) (build )
+# Java VM: OpenJDK 64-Bit Server VM (25.76-b03 mixed mode linux-amd64 compressed oops)
+# Problematic frame:
+# V  [libjvm.so+0x7df35d]  Method::is_final_method(AccessFlags) const+0x1d
+#
+# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.java.com/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007f091800a000):  JavaThread "Unknown thread" [_thread_in_vm, id=14400, stack(0x00007f092035d000,0x00007f092045e000)]
+
+siginfo: si_signo: 11 (SIGSEGV), si_code: 1 (SEGV_MAPERR), si_addr: 0x0000000001000141
+
+Registers:
+RAX=0x0000000000000000, RBX=0x0000000000000017, RCX=0x00007f09202c87a0, RDX=0x00000000010000a4
+RSP=0x00007f092045c8d0, RBP=0x00007f092045c8d0, RSI=0x0000000000000420, RDI=0x00007f090884cbf8
+R8 =0x00000000ffffffff, R9 =0x0000000000000000, R10=0x00000000000000b0, R11=0x0000000000000008
+R12=0x00007f091805eaf0, R13=0x00000000ffffffff, R14=0x0000000000000000, R15=0x00007f0918008cd0
+RIP=0x00007f091f14835d, EFLAGS=0x0000000000010202, CSGSFS=0x0000000000000033, ERR=0x0000000000000004
+  TRAPNO=0x000000000000000e
+
+Top of Stack: (sp=0x00007f092045c8d0)
+0x00007f092045c8d0:   00007f092045ca10 00007f091f076895
+0x00007f092045c8e0:   00007f091ef51ff5 0000000000000000
+0x00007f092045c8f0:   00007f092045c920 00007f092045c9d0
+0x00007f092045c900:   00007f0918008cd0 00007f092045c9c0
+0x00007f092045c910:   00007f092045c9c0 00007f090884d3d8
+0x00007f092045c920:   00007f09202dfe20 00007f091f077e74
+0x00007f092045c930:   000000010000a488 ffffffffffffffff
+0x00007f092045c940:   00007f090884de20 0000000100009048
+0x00007f092045c950:   00007f09202cc0d0 0000000000000000
+0x00007f092045c960:   00000000000083b0 00007f0918065128
+0x00007f092045c970:   00007f091805eb10 0000000000000000
+0x00007f092045c980:   000000010000a488 00007f091f078800
+0x00007f092045c990:   00007f091805d140 000000171f140b01
+0x00007f092045c9a0:   00007f091805ea00 00007f092045ca70
+0x00007f092045c9b0:   0000000000000017 00007f09202e0220
+0x00007f092045c9c0:   0000000000000017 00007f092045cba0
+0x00007f092045c9d0:   00007f092045c9f0 00007f091ef4574f
+0x00007f092045c9e0:   00007f091800a000 00007f091800a000
+0x00007f092045c9f0:   00007f090884b820 000000000000002e
+0x00007f092045ca00:   00007f091805eaf0 00007f090884cbf8
+0x00007f092045ca10:   00007f092045caf0 00007f091f078ad6
+0x00007f092045ca20:   00007f091800a000 0000000000048d80
+0x00007f092045ca30:   0000000000270000 00007f09088aa818
+0x00007f092045ca40:   00007f0900000040 00007f090884b868
+0x00007f092045ca50:   0000000000000000 00007f092045ca70
+0x00007f092045ca60:   0000001700000000 00007f092045ca80
+0x00007f092045ca70:   00007f090884cbf8 00007f091800a000
+0x00007f092045ca80:   00007f091800a000 00007f0918008d40
+0x00007f092045ca90:   00007f091800c790 00007f091800c950
+0x00007f092045caa0:   00007f0918014778 00000000000080b0
+0x00007f092045cab0:   00007f092045cbb0 000000010000a488
+0x00007f092045cac0:   0000000000000037 00007f091800a000 
+
+Instructions: (pc=0x00007f091f14835d)
+0x00007f091f14833d:   ff ff ff 55 48 8b 57 08 31 c0 48 89 e5 f6 42 1c
+0x00007f091f14834d:   40 75 23 48 8b 52 08 48 8b 52 18 48 85 d2 74 09
+0x00007f091f14835d:   f6 82 9d 00 00 00 02 75 12 8b 57 20 83 e2 10 b8
+0x00007f091f14836d:   01 00 00 00 74 15 5d c3 0f 1f 00 8b 57 20 f6 c6 
+
+Register to memory mapping:
+
+RAX=0x0000000000000000 is an unknown value
+RBX=0x0000000000000017 is an unknown value
+RCX=0x00007f09202c87a0 is an unknown value
+RDX=0x00000000010000a4 is an unknown value
+RSP=0x00007f092045c8d0 is an unknown value
+RBP=0x00007f092045c8d0 is an unknown value
+RSI=0x0000000000000420 is an unknown value
+RDI={method} {0x00007f090884cbf8} '
+[error occurred during error reporting (printing register info), id 0xb]
+
+Stack: [0x00007f092035d000,0x00007f092045e000],  sp=0x00007f092045c8d0,  free space=1022k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [libjvm.so+0x7df35d]  Method::is_final_method(AccessFlags) const+0x1d
+V  [libjvm.so+0x70d895]  klassVtable::update_inherited_vtable(InstanceKlass*, methodHandle, int, int, bool, Thread*)+0xd5
+V  [libjvm.so+0x70fad6]  klassVtable::initialize_vtable(bool, Thread*)+0x176
+V  [libjvm.so+0x9a3a0c]  Universe::reinitialize_vtable_of(KlassHandle, Thread*)+0x11c
+V  [libjvm.so+0x9a45f6]  universe_post_init()+0x156
+V  [libjvm.so+0x5da99f]  init_globals()+0xcf
+V  [libjvm.so+0x989ca3]  Threads::create_vm(JavaVMInitArgs*, bool*)+0x2b3
+V  [libjvm.so+0x647c52]  JNI_CreateJavaVM+0x52
+C  [libjli.so+0x77c8]  JavaMain+0x88
+C  [libpthread.so.0+0x76fa]  start_thread+0xca
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+
+Other Threads:
+
+=>0x00007f091800a000 (exited) JavaThread "Unknown thread" [_thread_in_vm, id=14400, stack(0x00007f092035d000,0x00007f092045e000)]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap:
+ PSYoungGen      total 75264K, used 1290K [0x00000000eab00000, 0x00000000eff00000, 0x0000000100000000)
+  eden space 64512K, 2% used [0x00000000eab00000,0x00000000eac42900,0x00000000eea00000)
+  from space 10752K, 0% used [0x00000000ef480000,0x00000000ef480000,0x00000000eff00000)
+  to   space 10752K, 0% used [0x00000000eea00000,0x00000000eea00000,0x00000000ef480000)
+ ParOldGen       total 172032K, used 0K [0x00000000c0000000, 0x00000000ca800000, 0x00000000eab00000)
+  object space 172032K, 0% used [0x00000000c0000000,0x00000000c0000000,0x00000000ca800000)
+ Metaspace       used 750K, capacity 4480K, committed 4480K, reserved 1056768K
+  class space    used 68K, capacity 384K, committed 384K, reserved 1048576K
+
+Card table byte_map: [0x00007f091cffa000,0x00007f091d1fb000] byte_map_base: 0x00007f091c9fa000
+
+Marking Bits: (ParMarkBitMap*) 0x00007f091f82c1a0
+ Begin Bits: [0x00007f0902000000, 0x00007f0903000000)
+ End Bits:   [0x00007f0903000000, 0x00007f0904000000)
+
+Polling page: 0x00007f092047c000
+
+CodeCache: size=245760Kb used=291Kb max_used=291Kb free=245468Kb
+ bounds [0x00007f0909000000, 0x00007f0909270000, 0x00007f0918000000]
+ total_blobs=16 nmethods=0 adapters=0
+ compilation: enabled
+
+Compilation events (0 events):
+No events
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (10 events):
+Event: 0.039 loading class java/lang/Double
+Event: 0.039 loading class java/lang/Double done
+Event: 0.039 loading class java/lang/Byte
+Event: 0.039 loading class java/lang/Byte done
+Event: 0.039 loading class java/lang/Short
+Event: 0.039 loading class java/lang/Short done
+Event: 0.039 loading class java/lang/Integer
+Event: 0.039 loading class java/lang/Integer done
+Event: 0.039 loading class java/lang/Long
+Event: 0.039 loading class java/lang/Long done
+
+
+Dynamic libraries:
+00400000-00401000 r-xp 00000000 08:01 117965799                          /usr/local/android-studio/jre/bin/java
+00600000-00601000 r--p 00000000 08:01 117965799                          /usr/local/android-studio/jre/bin/java
+00601000-00602000 rw-p 00001000 08:01 117965799                          /usr/local/android-studio/jre/bin/java
+023da000-023fb000 rw-p 00000000 00:00 0                                  [heap]
+c0000000-ca800000 rw-p 00000000 00:00 0 
+ca800000-eab00000 ---p 00000000 00:00 0 
+eab00000-eff00000 rw-p 00000000 00:00 0 
+eff00000-100000000 ---p 00000000 00:00 0 
+100000000-100060000 rw-p 00000000 00:00 0 
+100060000-140000000 ---p 00000000 00:00 0 
+7f08dc000000-7f08dc021000 rw-p 00000000 00:00 0 
+7f08dc021000-7f08e0000000 ---p 00000000 00:00 0 
+7f08e4000000-7f08e4021000 rw-p 00000000 00:00 0 
+7f08e4021000-7f08e8000000 ---p 00000000 00:00 0 
+7f08ec000000-7f08ec021000 rw-p 00000000 00:00 0 
+7f08ec021000-7f08f0000000 ---p 00000000 00:00 0 
+7f08f4000000-7f08f4021000 rw-p 00000000 00:00 0 
+7f08f4021000-7f08f8000000 ---p 00000000 00:00 0 
+7f08fc000000-7f08fc021000 rw-p 00000000 00:00 0 
+7f08fc021000-7f0900000000 ---p 00000000 00:00 0 
+7f0902000000-7f0904000000 rw-p 00000000 00:00 0 
+7f0904000000-7f0904021000 rw-p 00000000 00:00 0 
+7f0904021000-7f0908000000 ---p 00000000 00:00 0 
+7f0908800000-7f0908c00000 rw-p 00000000 00:00 0 
+7f0908c00000-7f0909000000 ---p 00000000 00:00 0 
+7f0909000000-7f0909270000 rwxp 00000000 00:00 0 
+7f0909270000-7f0918000000 ---p 00000000 00:00 0 
+7f0918000000-7f091808e000 rw-p 00000000 00:00 0 
+7f091808e000-7f091c000000 ---p 00000000 00:00 0 
+7f091c199000-7f091c45b000 rw-p 00000000 00:00 0 
+7f091c45b000-7f091c628000 r--s 03bec000 08:01 117965856                  /usr/local/android-studio/jre/jre/lib/rt.jar
+7f091c628000-7f091c89e000 rw-p 00000000 00:00 0 
+7f091c89e000-7f091c89f000 ---p 00000000 00:00 0 
+7f091c89f000-7f091c99f000 rw-p 00000000 00:00 0 
+7f091c99f000-7f091c9a0000 ---p 00000000 00:00 0 
+7f091c9a0000-7f091caa0000 rw-p 00000000 00:00 0 
+7f091caa0000-7f091caa1000 ---p 00000000 00:00 0 
+7f091caa1000-7f091cba1000 rw-p 00000000 00:00 0 
+7f091cba1000-7f091cba2000 ---p 00000000 00:00 0 
+7f091cba2000-7f091cca2000 rw-p 00000000 00:00 0 
+7f091cca2000-7f091cca3000 ---p 00000000 00:00 0 
+7f091cca3000-7f091cda3000 rw-p 00000000 00:00 0 
+7f091cda3000-7f091cda4000 ---p 00000000 00:00 0 
+7f091cda4000-7f091cef8000 rw-p 00000000 00:00 0 
+7f091cef8000-7f091cffa000 ---p 00000000 00:00 0 
+7f091cffa000-7f091d04e000 rw-p 00000000 00:00 0 
+7f091d04e000-7f091d14f000 ---p 00000000 00:00 0 
+7f091d14f000-7f091d17a000 rw-p 00000000 00:00 0 
+7f091d17a000-7f091d1fa000 ---p 00000000 00:00 0 
+7f091d1fa000-7f091d205000 rw-p 00000000 00:00 0 
+7f091d205000-7f091d5bb000 ---p 00000000 00:00 0 
+7f091d5bb000-7f091d5d5000 r-xp 00000000 08:01 117965883                  /usr/local/android-studio/jre/jre/lib/amd64/libzip.so
+7f091d5d5000-7f091d7d5000 ---p 0001a000 08:01 117965883                  /usr/local/android-studio/jre/jre/lib/amd64/libzip.so
+7f091d7d5000-7f091d7d6000 r--p 0001a000 08:01 117965883                  /usr/local/android-studio/jre/jre/lib/amd64/libzip.so
+7f091d7d6000-7f091d7d7000 rw-p 0001b000 08:01 117965883                  /usr/local/android-studio/jre/jre/lib/amd64/libzip.so
+7f091d7d7000-7f091d7e2000 r-xp 00000000 08:01 22286722                   /lib/x86_64-linux-gnu/libnss_files-2.23.so
+7f091d7e2000-7f091d9e1000 ---p 0000b000 08:01 22286722                   /lib/x86_64-linux-gnu/libnss_files-2.23.so
+7f091d9e1000-7f091d9e2000 r--p 0000a000 08:01 22286722                   /lib/x86_64-linux-gnu/libnss_files-2.23.so
+7f091d9e2000-7f091d9e3000 rw-p 0000b000 08:01 22286722                   /lib/x86_64-linux-gnu/libnss_files-2.23.so
+7f091d9e3000-7f091d9e9000 rw-p 00000000 00:00 0 
+7f091d9e9000-7f091d9f4000 r-xp 00000000 08:01 22286732                   /lib/x86_64-linux-gnu/libnss_nis-2.23.so
+7f091d9f4000-7f091dbf3000 ---p 0000b000 08:01 22286732                   /lib/x86_64-linux-gnu/libnss_nis-2.23.so
+7f091dbf3000-7f091dbf4000 r--p 0000a000 08:01 22286732                   /lib/x86_64-linux-gnu/libnss_nis-2.23.so
+7f091dbf4000-7f091dbf5000 rw-p 0000b000 08:01 22286732                   /lib/x86_64-linux-gnu/libnss_nis-2.23.so
+7f091dbf5000-7f091dc0b000 r-xp 00000000 08:01 22286716                   /lib/x86_64-linux-gnu/libnsl-2.23.so
+7f091dc0b000-7f091de0a000 ---p 00016000 08:01 22286716                   /lib/x86_64-linux-gnu/libnsl-2.23.so
+7f091de0a000-7f091de0b000 r--p 00015000 08:01 22286716                   /lib/x86_64-linux-gnu/libnsl-2.23.so
+7f091de0b000-7f091de0c000 rw-p 00016000 08:01 22286716                   /lib/x86_64-linux-gnu/libnsl-2.23.so
+7f091de0c000-7f091de0e000 rw-p 00000000 00:00 0 
+7f091de0e000-7f091de16000 r-xp 00000000 08:01 22286718                   /lib/x86_64-linux-gnu/libnss_compat-2.23.so
+7f091de16000-7f091e015000 ---p 00008000 08:01 22286718                   /lib/x86_64-linux-gnu/libnss_compat-2.23.so
+7f091e015000-7f091e016000 r--p 00007000 08:01 22286718                   /lib/x86_64-linux-gnu/libnss_compat-2.23.so
+7f091e016000-7f091e017000 rw-p 00008000 08:01 22286718                   /lib/x86_64-linux-gnu/libnss_compat-2.23.so
+7f091e017000-7f091e044000 r-xp 00000000 08:01 117965893                  /usr/local/android-studio/jre/jre/lib/amd64/libjava.so
+7f091e044000-7f091e243000 ---p 0002d000 08:01 117965893                  /usr/local/android-studio/jre/jre/lib/amd64/libjava.so
+7f091e243000-7f091e244000 r--p 0002c000 08:01 117965893                  /usr/local/android-studio/jre/jre/lib/amd64/libjava.so
+7f091e244000-7f091e246000 rw-p 0002d000 08:01 117965893                  /usr/local/android-studio/jre/jre/lib/amd64/libjava.so
+7f091e246000-7f091e256000 r-xp 00000000 08:01 117965909                  /usr/local/android-studio/jre/jre/lib/amd64/libverify.so
+7f091e256000-7f091e455000 ---p 00010000 08:01 117965909                  /usr/local/android-studio/jre/jre/lib/amd64/libverify.so
+7f091e455000-7f091e457000 r--p 0000f000 08:01 117965909                  /usr/local/android-studio/jre/jre/lib/amd64/libverify.so
+7f091e457000-7f091e458000 rw-p 00011000 08:01 117965909                  /usr/local/android-studio/jre/jre/lib/amd64/libverify.so
+7f091e458000-7f091e45f000 r-xp 00000000 08:01 22286777                   /lib/x86_64-linux-gnu/librt-2.23.so
+7f091e45f000-7f091e65e000 ---p 00007000 08:01 22286777                   /lib/x86_64-linux-gnu/librt-2.23.so
+7f091e65e000-7f091e65f000 r--p 00006000 08:01 22286777                   /lib/x86_64-linux-gnu/librt-2.23.so
+7f091e65f000-7f091e660000 rw-p 00007000 08:01 22286777                   /lib/x86_64-linux-gnu/librt-2.23.so
+7f091e660000-7f091e768000 r-xp 00000000 08:01 22286693                   /lib/x86_64-linux-gnu/libm-2.23.so
+7f091e768000-7f091e967000 ---p 00108000 08:01 22286693                   /lib/x86_64-linux-gnu/libm-2.23.so
+7f091e967000-7f091e968000 r--p 00107000 08:01 22286693                   /lib/x86_64-linux-gnu/libm-2.23.so
+7f091e968000-7f091e969000 rw-p 00108000 08:01 22286693                   /lib/x86_64-linux-gnu/libm-2.23.so
+7f091e969000-7f091f54f000 r-xp 00000000 08:01 117965913                  /usr/local/android-studio/jre/jre/lib/amd64/server/libjvm.so
+7f091f54f000-7f091f74f000 ---p 00be6000 08:01 117965913                  /usr/local/android-studio/jre/jre/lib/amd64/server/libjvm.so
+7f091f74f000-7f091f7ee000 r--p 00be6000 08:01 117965913                  /usr/local/android-studio/jre/jre/lib/amd64/server/libjvm.so
+7f091f7ee000-7f091f817000 rw-p 00c85000 08:01 117965913                  /usr/local/android-studio/jre/jre/lib/amd64/server/libjvm.so
+7f091f817000-7f091f859000 rw-p 00000000 00:00 0 
+7f091f859000-7f091f871000 r-xp 00000000 08:01 22286769                   /lib/x86_64-linux-gnu/libpthread-2.23.so
+7f091f871000-7f091fa70000 ---p 00018000 08:01 22286769                   /lib/x86_64-linux-gnu/libpthread-2.23.so
+7f091fa70000-7f091fa71000 r--p 00017000 08:01 22286769                   /lib/x86_64-linux-gnu/libpthread-2.23.so
+7f091fa71000-7f091fa72000 rw-p 00018000 08:01 22286769                   /lib/x86_64-linux-gnu/libpthread-2.23.so
+7f091fa72000-7f091fa76000 rw-p 00000000 00:00 0 
+7f091fa76000-7f091fa79000 r-xp 00000000 08:01 22286647                   /lib/x86_64-linux-gnu/libdl-2.23.so
+7f091fa79000-7f091fc78000 ---p 00003000 08:01 22286647                   /lib/x86_64-linux-gnu/libdl-2.23.so
+7f091fc78000-7f091fc79000 r--p 00002000 08:01 22286647                   /lib/x86_64-linux-gnu/libdl-2.23.so
+7f091fc79000-7f091fc7a000 rw-p 00003000 08:01 22286647                   /lib/x86_64-linux-gnu/libdl-2.23.so
+7f091fc7a000-7f091fe3a000 r-xp 00000000 08:01 22286623                   /lib/x86_64-linux-gnu/libc-2.23.so
+7f091fe3a000-7f0920039000 ---p 001c0000 08:01 22286623                   /lib/x86_64-linux-gnu/libc-2.23.so
+7f0920039000-7f092003d000 r--p 001bf000 08:01 22286623                   /lib/x86_64-linux-gnu/libc-2.23.so
+7f092003d000-7f092003f000 rw-p 001c3000 08:01 22286623                   /lib/x86_64-linux-gnu/libc-2.23.so
+7f092003f000-7f0920043000 rw-p 00000000 00:00 0 
+7f0920043000-7f0920059000 r-xp 00000000 08:01 117965773                  /usr/local/android-studio/jre/lib/amd64/jli/libjli.so
+7f0920059000-7f0920258000 ---p 00016000 08:01 117965773                  /usr/local/android-studio/jre/lib/amd64/jli/libjli.so
+7f0920258000-7f0920259000 r--p 00015000 08:01 117965773                  /usr/local/android-studio/jre/lib/amd64/jli/libjli.so
+7f0920259000-7f092025a000 rw-p 00016000 08:01 117965773                  /usr/local/android-studio/jre/lib/amd64/jli/libjli.so
+7f092025a000-7f0920280000 r-xp 00000000 08:01 22286595                   /lib/x86_64-linux-gnu/ld-2.23.so
+7f09202c6000-7f092035d000 rw-p 00000000 00:00 0 
+7f092035d000-7f0920360000 ---p 00000000 00:00 0 
+7f0920360000-7f0920462000 rw-p 00000000 00:00 0 
+7f0920473000-7f092047b000 rw-s 00000000 08:01 106827181                  /tmp/hsperfdata_n3v10t/14398
+7f092047b000-7f092047c000 rw-p 00000000 00:00 0 
+7f092047c000-7f092047d000 r--p 00000000 00:00 0 
+7f092047d000-7f092047f000 rw-p 00000000 00:00 0 
+7f092047f000-7f0920480000 r--p 00025000 08:01 22286595                   /lib/x86_64-linux-gnu/ld-2.23.so
+7f0920480000-7f0920481000 rw-p 00026000 08:01 22286595                   /lib/x86_64-linux-gnu/ld-2.23.so
+7f0920481000-7f0920482000 rw-p 00000000 00:00 0 
+7fff90a0a000-7fff90a2c000 rw-p 00000000 00:00 0                          [stack]
+7fff90abc000-7fff90abe000 r--p 00000000 00:00 0                          [vvar]
+7fff90abe000-7fff90ac0000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+
+VM Arguments:
+jvm_args: -Djava.awt.headless=true -Xmx1024M -Dfile.encoding=UTF-8 -Duser.country=US -Duser.language=en -Duser.variant 
+java_command: com.android.dx.command.Main --dex --force-jumbo --num-threads=4 --multi-dex --output /home/n3v10t/Android-Projects/BumbleBeeM/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_1 /home/n3v10t/Android-Projects/BumbleBeeM/app/build/intermediates/transforms/instantRunSlicer/debug/folders/1/5/slice_1
+java_class_path (initial): /home/n3v10t/Android/Sdk/build-tools/24.0.1/lib/dx.jar
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+PATH=/home/n3v10t/bin:/home/n3v10t/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+LD_LIBRARY_PATH=.:
+SHELL=/bin/bash
+DISPLAY=:0
+
+Signal Handlers:
+SIGSEGV: [libjvm.so+0x9daac0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGBUS: [libjvm.so+0x9daac0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGFPE: [libjvm.so+0x840d90], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGPIPE: [libjvm.so+0x840d90], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGXFSZ: [libjvm.so+0x840d90], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGILL: [libjvm.so+0x840d90], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGUSR1: SIG_DFL, sa_mask[0]=00000000000000000000000000000000, sa_flags=none
+SIGUSR2: [libjvm.so+0x840c60], sa_mask[0]=00100000000000000000000000000000, sa_flags=SA_RESTART|SA_SIGINFO
+SIGHUP: SIG_DFL, sa_mask[0]=00000000000000000000000000000000, sa_flags=none
+SIGINT: SIG_DFL, sa_mask[0]=00000000000000000000000000000000, sa_flags=none
+SIGTERM: SIG_DFL, sa_mask[0]=00000000000000000000000000000000, sa_flags=none
+SIGQUIT: SIG_DFL, sa_mask[0]=00000000000000000000000000000000, sa_flags=none
+
+
+---------------  S Y S T E M  ---------------
+
+OS:DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=16.04
+DISTRIB_CODENAME=xenial
+DISTRIB_DESCRIPTION="Ubuntu 16.04.1 LTS"
+
+uname:Linux 4.4.0-38-generic #57-Ubuntu SMP Tue Sep 6 15:42:33 UTC 2016 x86_64
+libc:glibc 2.23 NPTL 2.23 
+rlimit: STACK 8192k, CORE 0k, NPROC 63772, NOFILE 65536, AS infinity
+load average:3.22 1.00 0.64
+
+/proc/meminfo:
+MemTotal:       16431444 kB
+MemFree:         5244336 kB
+MemAvailable:    9032592 kB
+Buffers:          209228 kB
+Cached:          4094392 kB
+SwapCached:            0 kB
+Active:          8426756 kB
+Inactive:        2279744 kB
+Active(anon):    6404408 kB
+Inactive(anon):   430056 kB
+Active(file):    2022348 kB
+Inactive(file):  1849688 kB
+Unevictable:          64 kB
+Mlocked:              64 kB
+SwapTotal:      16774140 kB
+SwapFree:       16774140 kB
+Dirty:             33028 kB
+Writeback:             0 kB
+AnonPages:       6403220 kB
+Mapped:           805496 kB
+Shmem:            431588 kB
+Slab:             303172 kB
+SReclaimable:     253532 kB
+SUnreclaim:        49640 kB
+KernelStack:       16992 kB
+PageTables:        71356 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:    24989860 kB
+Committed_AS:   15552412 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:           0 kB
+VmallocChunk:          0 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:   4038656 kB
+CmaTotal:              0 kB
+CmaFree:               0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+DirectMap4k:      213568 kB
+DirectMap2M:    10270720 kB
+DirectMap1G:     6291456 kB
+
+
+CPU:total 6 (6 cores per cpu, 1 threads per core) family 16 model 10 stepping 0, cmov, cx8, fxsr, mmx, sse, sse2, sse3, popcnt, mmxext, 3dnowpref, lzcnt, sse4a, tsc, tscinvbit, tscinv
+
+/proc/cpuinfo:
+processor	: 0
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 10
+model name	: AMD Phenom(tm) II X6 1090T Processor
+stepping	: 0
+microcode	: 0x10000bf
+cpu MHz		: 3200.000
+cache size	: 512 KB
+physical id	: 0
+siblings	: 6
+core id		: 0
+cpu cores	: 6
+apicid		: 0
+initial apicid	: 0
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 6
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow constant_tsc rep_good nopl nonstop_tsc extd_apicid aperfmperf pni monitor cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt cpb hw_pstate vmmcall npt lbrv svm_lock nrip_save pausefilter
+bugs		: tlb_mmatch apic_c1e fxsave_leak sysret_ss_attrs
+bogomips	: 7449.34
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate cpb
+
+processor	: 1
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 10
+model name	: AMD Phenom(tm) II X6 1090T Processor
+stepping	: 0
+microcode	: 0x10000bf
+cpu MHz		: 3200.000
+cache size	: 512 KB
+physical id	: 0
+siblings	: 6
+core id		: 1
+cpu cores	: 6
+apicid		: 1
+initial apicid	: 1
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 6
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow constant_tsc rep_good nopl nonstop_tsc extd_apicid aperfmperf pni monitor cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt cpb hw_pstate vmmcall npt lbrv svm_lock nrip_save pausefilter
+bugs		: tlb_mmatch apic_c1e fxsave_leak sysret_ss_attrs
+bogomips	: 7449.34
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate cpb
+
+processor	: 2
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 10
+model name	: AMD Phenom(tm) II X6 1090T Processor
+stepping	: 0
+microcode	: 0x10000bf
+cpu MHz		: 3200.000
+cache size	: 512 KB
+physical id	: 0
+siblings	: 6
+core id		: 2
+cpu cores	: 6
+apicid		: 2
+initial apicid	: 2
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 6
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow constant_tsc rep_good nopl nonstop_tsc extd_apicid aperfmperf pni monitor cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt cpb hw_pstate vmmcall npt lbrv svm_lock nrip_save pausefilter
+bugs		: tlb_mmatch apic_c1e fxsave_leak sysret_ss_attrs
+bogomips	: 7449.34
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate cpb
+
+processor	: 3
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 10
+model name	: AMD Phenom(tm) II X6 1090T Processor
+stepping	: 0
+microcode	: 0x10000bf
+cpu MHz		: 3200.000
+cache size	: 512 KB
+physical id	: 0
+siblings	: 6
+core id		: 3
+cpu cores	: 6
+apicid		: 3
+initial apicid	: 3
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 6
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow constant_tsc rep_good nopl nonstop_tsc extd_apicid aperfmperf pni monitor cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt cpb hw_pstate vmmcall npt lbrv svm_lock nrip_save pausefilter
+bugs		: tlb_mmatch apic_c1e fxsave_leak sysret_ss_attrs
+bogomips	: 7449.34
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate cpb
+
+processor	: 4
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 10
+model name	: AMD Phenom(tm) II X6 1090T Processor
+stepping	: 0
+microcode	: 0x10000bf
+cpu MHz		: 3200.000
+cache size	: 512 KB
+physical id	: 0
+siblings	: 6
+core id		: 4
+cpu cores	: 6
+apicid		: 4
+initial apicid	: 4
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 6
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow constant_tsc rep_good nopl nonstop_tsc extd_apicid aperfmperf pni monitor cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt cpb hw_pstate vmmcall npt lbrv svm_lock nrip_save pausefilter
+bugs		: tlb_mmatch apic_c1e fxsave_leak sysret_ss_attrs
+bogomips	: 7449.34
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate cpb
+
+processor	: 5
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 10
+model name	: AMD Phenom(tm) II X6 1090T Processor
+stepping	: 0
+microcode	: 0x10000bf
+cpu MHz		: 3200.000
+cache size	: 512 KB
+physical id	: 0
+siblings	: 6
+core id		: 5
+cpu cores	: 6
+apicid		: 5
+initial apicid	: 5
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 6
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow constant_tsc rep_good nopl nonstop_tsc extd_apicid aperfmperf pni monitor cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt cpb hw_pstate vmmcall npt lbrv svm_lock nrip_save pausefilter
+bugs		: tlb_mmatch apic_c1e fxsave_leak sysret_ss_attrs
+bogomips	: 7449.34
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate cpb
+
+
+
+Memory: 4k page, physical 16431444k(5244336k free), swap 16774140k(16774140k free)
+
+vm_info: OpenJDK 64-Bit Server VM (25.76-b03) for linux-amd64 JRE (1.8.0_76-release-b03), built on Jun 29 2016 09:39:19 by "builder" with gcc 4.8.4
+
+time: Thu Oct  6 17:51:21 2016
+elapsed time: 0 seconds (0d 0h 0m 0s)
+

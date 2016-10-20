@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.bumblebeem.android.bumblebeem.MainActivity"
+    >
+
+    <Button
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:text="@string/start_game"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:id="@+id/start_game_button"
+        android:background="@xml/selector"
+        android:layout_centerInParent="true"
+        android:elevation="6dp"/>
+</RelativeLayout>

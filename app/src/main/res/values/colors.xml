@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFC107</color>
+    <color name="colorPrimaryDark">#FFA000</color>
+    <color name="colorPrimaryLight">#FFECB3</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimaryText">#212121</color>
+    <color name="colorSecondaryText">#757575</color>
+    <color name="colorIcons">#212121</color>
+    <color name="colorDivider">#BDBDBD</color>
+
+    <color name="circle1">#FFA000</color>
+    <color name="circle2">#F44336</color>
+    <color name="red">#F44336</color>
+    <color name="green">#4CAF50</color>
+    <color name="amber">#FFC107</color>
+    <color name="white">#FFFFFF</color>
+    <color name="background">#FFD54F</color>
+    <color name="dark_amber">#FFB300</color>
+    <color name="black">#000000</color>
+    <color name="gray">#9E9E9E</color>
+    <color name="lightgrey">#E0E0E0</color>
+
+
+</resources>
