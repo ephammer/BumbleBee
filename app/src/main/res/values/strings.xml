@@ -3,4 +3,5 @@
     <string name="start_game">Start Game</string>
     <string name="results">Results</string>
     <string name="play_again">Play Again</string>
+    <string name="done_string">Done</string>
 </resources>

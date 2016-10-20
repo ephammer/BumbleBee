@@ -3,7 +3,11 @@ package com.bumblebeem.android.bumblebeem;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.speech.tts.TextToSpeech;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputFilter;
 import android.view.KeyEvent;
@@ -15,17 +19,21 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Locale;
 
 public class GameActivity extends AppCompatActivity {
 
     // Initialize the index of the current Word that is played in the list of Words
-    int indexOfActualWord = 0;
+    private int indexOfActualWord = 0;
 
     // ArrayList of Words that contains the words of the actual game
-    ArrayList<Word> words;
+    public static ArrayList<Word> words;
+
+    // Initialize TextToSpeech
+    private TextToSpeech textToSpeech;
 
     @Override
-    protected void onCreate( Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
@@ -34,7 +42,7 @@ public class GameActivity extends AppCompatActivity {
          * The actual Level File is contained in the levelString field
          * The level number is contained in the level field*/
         Intent levelIntent = getIntent();
-        String levelFile = levelIntent.getStringExtra("levelString");
+        final String levelFile = levelIntent.getStringExtra("levelString");
         int levelInt = levelIntent.getIntExtra("level", 1);
 
         // Get all the words contained in the level file
@@ -44,13 +52,14 @@ public class GameActivity extends AppCompatActivity {
         words = read.loadFile();
 
         // Narrow the number of Words down to 30 and randomize the list
-        words = pickNRandom(words,30);
+        words = pickNRandom(words, 30);
 
         // Initialize the different UI Elements
-        ImageButton replayButton = (ImageButton) findViewById(R.id.replay_button);
-        ImageButton skipButton = (ImageButton) findViewById(R.id.skip_button);
+        final ImageButton replayButton = (ImageButton) findViewById(R.id.replay_button);
+        final ImageButton skipButton = (ImageButton) findViewById(R.id.skip_button);
         final CustomEditText playerInput = (CustomEditText) findViewById(R.id.editText);
-
+        final TextView countDownTextView = (TextView) findViewById(R.id.countdown_textView);
+        final GradientDrawable countDowTextViewColor = (GradientDrawable) countDownTextView.getBackground();
         // Initialize the input method
         final InputMethodManager keyboard = (InputMethodManager) getSystemService(
                 Context.INPUT_METHOD_SERVICE);
@@ -116,16 +125,69 @@ public class GameActivity extends AppCompatActivity {
                     }
                     return true;
                 } else
-                return false;
+                    return false;
             }
         });
 
 
+        // Start CountDownTimer
+        new CountDownTimer(20000, 1000) {
+
+
+            @Override
+            public void onTick(long l) {
+                countDownTextView.setText(String.valueOf(l / 1000));
+
+                if (l < 6000) {
+                    countDowTextViewColor.setColor(ContextCompat.getColor(GameActivity.this, R.color.circle2));
+
+                }
+            }
+
+            @Override
+            public void onFinish() {
+                // Hide keyboard
+                keyboard.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+
+                // Hide all the views exept the counter view
+                playerInput.setVisibility(View.GONE);
+                replayButton.setVisibility(View.GONE);
+                skipButton.setVisibility(View.GONE);
+
+                // Set countdown TextView to done
+                countDowTextViewColor.setColor(null);
+                countDownTextView.setText(R.string.done_string);
+
+                // Trim the list to the actual numbers of entries of the player
+                words = new ArrayList<>(words.subList(0, indexOfActualWord));
+
+                //  Start the ResultActivity when the counter is finished  *//*
+                Intent i = new Intent(GameActivity.this, ResultsActivity.class);
+                i.putExtra("level", levelFile);
+                startActivity(i);
+
+                /* Finish current Activity so as that the player can't come back on this activity
+                 * when hitting the back button
+                 */
+                finish();
+            }
+        }.start();
 
     }
 
     // Function that plays the actual word
-    private void playWord(String word) {
+    private void playWord(final String word) {
+        textToSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status != TextToSpeech.ERROR) {
+                    textToSpeech.setLanguage(Locale.UK);
+
+                    textToSpeech.speak(word, TextToSpeech.QUEUE_FLUSH, null, null);
+                }
+            }
+        });
+
     }
 
     /* Function that takes as input a ArrayList of Words

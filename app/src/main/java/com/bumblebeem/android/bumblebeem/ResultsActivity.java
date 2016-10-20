@@ -34,8 +34,8 @@ public class ResultsActivity extends AppCompatActivity
         int highscore = 0;
 
         // Compute highscore
-        for (int i = 0; i < GameActivity.randomWordsList.size() ; i++) {
-            highscore += GameActivity.randomWordsList.get(i).score();
+        for (int i = 0; i < GameActivity.words.size() ; i++) {
+            highscore += GameActivity.words.get(i).score();
         }
         highScoreTextView.append(String.valueOf(highscore));
         highScoreTextView.setTypeface(custom_font);
@@ -45,8 +45,8 @@ public class ResultsActivity extends AppCompatActivity
         TextView nbCorrectTextView = (TextView)findViewById(R.id.numberOfCorrectWords_score_textview);
         int intNbWrong = 0;
         int intNbCorrect=0;
-        for (int i = 0; i < GameActivity.randomWordsList.size() ; i++) {
-            if(GameActivity.randomWordsList.get(i).isEqual())
+        for (int i = 0; i < GameActivity.words.size() ; i++) {
+            if(GameActivity.words.get(i).isEqual())
                 intNbCorrect ++;
             else
                 intNbWrong++;
@@ -56,7 +56,7 @@ public class ResultsActivity extends AppCompatActivity
 
         // Create an {@link WordAdapter}, whose data source is a list of {@link Word}s. The
         // adapter knows how to create list items for each item in the list.
-        WordAdapter adapter = new WordAdapter(ResultsActivity.this, GameActivity.randomWordsList);
+        WordAdapter adapter = new WordAdapter(ResultsActivity.this, GameActivity.words);
 
         // Find the {@link ListView} object in the view hierarchy of the {@link Activity}.
         // There should be a {@link ListView} with the view ID called list, which is declared in the
