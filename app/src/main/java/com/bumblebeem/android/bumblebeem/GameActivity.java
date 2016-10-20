@@ -43,7 +43,7 @@ public class GameActivity extends AppCompatActivity {
          * The level number is contained in the level field*/
         Intent levelIntent = getIntent();
         final String levelFile = levelIntent.getStringExtra("levelString");
-        int levelInt = levelIntent.getIntExtra("level", 1);
+        final int levelInt = levelIntent.getIntExtra("level", 1);
 
         // Get all the words contained in the level file
         Read read = new Read(GameActivity.this, levelFile, levelInt);
@@ -129,6 +129,8 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
+        // Start with the first word of the list
+        playWord(words.get(indexOfActualWord).getWord());
 
         // Start CountDownTimer
         new CountDownTimer(20000, 1000) {
@@ -163,7 +165,8 @@ public class GameActivity extends AppCompatActivity {
 
                 //  Start the ResultActivity when the counter is finished  *//*
                 Intent i = new Intent(GameActivity.this, ResultsActivity.class);
-                i.putExtra("level", levelFile);
+                i.putExtra("level", levelInt);
+                i.putExtra("levelString", levelFile );
                 startActivity(i);
 
                 /* Finish current Activity so as that the player can't come back on this activity

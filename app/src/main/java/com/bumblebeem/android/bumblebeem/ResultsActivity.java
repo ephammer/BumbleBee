@@ -75,8 +75,10 @@ public class ResultsActivity extends AppCompatActivity
             {
                 Intent i = new Intent(ResultsActivity.this,GameActivity.class);
                 Intent intent = getIntent();
-                String levelFile = intent.getStringExtra("level");
-                i.putExtra("level",levelFile);
+                int levelInt = intent.getIntExtra("level",1);
+                i.putExtra("level",levelInt);
+                String levelFile = intent.getStringExtra("levelString");
+                i.putExtra("levelString",levelFile);
                 startActivity(i);
                 finish();
             }
