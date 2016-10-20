@@ -1,11 +1,17 @@
 package com.bumblebeem.android.bumblebeem;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputFilter;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,6 +51,10 @@ public class GameActivity extends AppCompatActivity {
         ImageButton skipButton = (ImageButton) findViewById(R.id.skip_button);
         final CustomEditText playerInput = (CustomEditText) findViewById(R.id.editText);
 
+        // Initialize the input method
+        final InputMethodManager keyboard = (InputMethodManager) getSystemService(
+                Context.INPUT_METHOD_SERVICE);
+
         /* Set an OnClickListener on the replay Button
          * When the player clicks on the replay button the actual word in the list is replayed */
         replayButton.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +84,39 @@ public class GameActivity extends AppCompatActivity {
 
                 } else // if we are in the end of list play current word again
                     playWord(words.get(indexOfActualWord).getWord());
+            }
+        });
+
+        // Force All caps in the EditText field
+        playerInput.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
+
+        /* Set OnEditorActionListener on the EditText field
+         * The listener listens if the user enter the ENTER key
+         * When activated the content of the EditText field is saved in the corresponding
+         * playerInput field in the actual word */
+        playerInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    // Get input of player of EditText field
+                    words.get(indexOfActualWord).setPlayerInput(
+                            playerInput.getText().toString().trim().toLowerCase());
+
+                    if (indexOfActualWord < words.size() - 1) {
+                        // Set entry filed blank
+                        playerInput.setText("");
+
+                        // Force keyboard to stay open
+                        keyboard.toggleSoftInput(InputMethodManager.SHOW_FORCED,
+                                InputMethodManager.HIDE_IMPLICIT_ONLY);
+
+                        // Play next word in list
+                        indexOfActualWord++;
+                        playWord(words.get(indexOfActualWord).getWord());
+                    }
+                    return true;
+                } else
+                return false;
             }
         });
 
