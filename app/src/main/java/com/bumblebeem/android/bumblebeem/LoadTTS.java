@@ -18,7 +18,6 @@ import static android.content.ContentValues.TAG;
 public class LoadTTS {
 
     private TextToSpeech textToSpeech;
-    private String SD_DATA_PATH;
     private String audioFolderDataPath;
 
     // Boolean that verifies stat of TTS
@@ -27,7 +26,7 @@ public class LoadTTS {
 
     public LoadTTS(Context context, ArrayList<Word> words) {
         // Initialize the data path to the internal memory
-        SD_DATA_PATH = context.getFilesDir().getAbsolutePath();
+        String SD_DATA_PATH = context.getFilesDir().getAbsolutePath();
 
         // Initialize audio folder where the synthesized audio files are stored
         audioFolderDataPath = SD_DATA_PATH + File.separator + "./audio";
