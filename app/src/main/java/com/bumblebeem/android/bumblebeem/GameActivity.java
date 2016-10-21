@@ -54,6 +54,9 @@ public class GameActivity extends AppCompatActivity {
         // Narrow the number of Words down to 30 and randomize the list
         words = pickNRandom(words, 30);
 
+        // Load TTS in files
+        LoadTTS loadTTS = new LoadTTS(getApplicationContext(), words);
+
         // Initialize the different UI Elements
         final ImageButton replayButton = (ImageButton) findViewById(R.id.replay_button);
         final ImageButton skipButton = (ImageButton) findViewById(R.id.skip_button);
@@ -199,5 +202,32 @@ public class GameActivity extends AppCompatActivity {
         ArrayList<Word> copy = new ArrayList<>(lst);
         Collections.shuffle(copy);
         return new ArrayList<>(copy.subList(0, n));
+    }
+
+    @Override
+    public void onPause() {
+        if (textToSpeech != null) {
+            textToSpeech.stop();
+            textToSpeech.shutdown();
+        }
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        if (textToSpeech != null) {
+            textToSpeech.stop();
+            textToSpeech.shutdown();
+        }
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (textToSpeech != null) {
+            textToSpeech.stop();
+            textToSpeech.shutdown();
+        }
+        super.onDestroy();
     }
 }

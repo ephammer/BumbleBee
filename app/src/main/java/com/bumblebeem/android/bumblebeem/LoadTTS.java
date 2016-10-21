@@ -75,6 +75,10 @@ public class LoadTTS {
             // Once All the files from the TTS are finished loading onDone is called
             @Override
             public void onDone(String utteranceId) {
+                if (textToSpeech != null) {
+                    textToSpeech.stop();
+                    textToSpeech.shutdown();
+                }
                 loadingFinished = true;
             }
 
