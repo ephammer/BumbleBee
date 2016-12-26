@@ -10,6 +10,7 @@ import android.speech.tts.TextToSpeech;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputFilter;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -56,6 +57,12 @@ public class GameActivity extends AppCompatActivity {
 
         // Load TTS in files
         LoadTTS loadTTS = new LoadTTS(getApplicationContext(), words);
+
+        // Checks if loading words to file id finished
+        if(loadTTS.isLoadingFinished())
+            Log.v("GameAvivity", "Loading is finshed");
+        else
+            Log.v("GameAvivity", "Loading is finshed");
 
         // Initialize the different UI Elements
         final ImageButton replayButton = (ImageButton) findViewById(R.id.replay_button);
