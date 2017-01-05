@@ -209,6 +209,7 @@ public class GameLevelActivity extends AppCompatActivity {
                                             intent.putExtra("sdDataPath",SD_DATA_PATH);
                                             // Start next activity with intent
                                             startActivity(intent);
+                                            finish();
                                         }
                                     });
 

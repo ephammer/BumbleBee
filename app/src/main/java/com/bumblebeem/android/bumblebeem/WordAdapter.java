@@ -50,10 +50,12 @@ public class WordAdapter extends ArrayAdapter<Word>
         TextView score = (TextView)listItemView.findViewById(R.id.score_textview);
         score.setText(String.valueOf(currentWord.score()) + " xp");
 
+        ImageView beeIcon = (ImageView)listItemView.findViewById(R.id.imageView);
+
         if(currentWord.isEqual())
         {
             inputWord.setTextColor(ContextCompat.getColor(getContext(), R.color.green));
-
+            beeIcon.setImageResource(R.drawable.bee_icon);
 //            // Rearrange the item to only display the word
 //            word.setVisibility(View.GONE);
 //            TextView wordTitle = (TextView)listItemView.findViewById(R.id.actual_word_title);
@@ -62,7 +64,6 @@ public class WordAdapter extends ArrayAdapter<Word>
         }
         else {
             inputWord.setTextColor(ContextCompat.getColor(getContext(), R.color.red));
-            ImageView beeIcon = (ImageView)listItemView.findViewById(R.id.imageView);
             beeIcon.setImageResource(R.drawable.bee_sad_icon);
             beeIcon.setBackgroundResource(R.drawable.honeycomb_wrong_icon);
         }

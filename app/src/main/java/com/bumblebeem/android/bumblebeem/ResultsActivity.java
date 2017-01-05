@@ -2,6 +2,7 @@ package com.bumblebeem.android.bumblebeem;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -40,9 +41,29 @@ public class ResultsActivity extends AppCompatActivity
         Typeface custom_font = Typeface.createFromAsset(getAssets(), "fonts/pacifico.ttf");
         results.setTypeface(custom_font);
 
-        // Set Highscore
+        // Set current score
+        TextView currentScoreTextView = (TextView)findViewById(R.id.current_score_textview);
+        currentScoreTextView.setText(String.valueOf(computeCurrentScore()));
+
+        // Save highscore in SharedPreference
+        SharedPreferences scores = getSharedPreferences("Scores",0);
+        int highscore = scores.getInt("HighScore",0);
+
+        // Cheks if current score is higher than current highscore
+        if(highscore<= computeCurrentScore())
+        {
+            highscore = computeCurrentScore();
+            SharedPreferences.Editor editor = scores.edit();
+            editor.putInt("HighScore", highscore);
+            editor.commit();
+            TextView congratulationMessage = (TextView)findViewById(R.id.congratulation_text_view);
+            congratulationMessage.setVisibility(View.VISIBLE);
+
+        }
+
+        // Display HighScore
         TextView highScoreTextView = (TextView)findViewById(R.id.highscore_text_view);
-        highScoreTextView.append(String.valueOf(computeHighScore()));
+        highScoreTextView.append(String.valueOf(highscore));
         highScoreTextView.setTypeface(custom_font);
 
         // Set stats of game
@@ -86,7 +107,7 @@ public class ResultsActivity extends AppCompatActivity
     }
 
     // Compute highscore
-    private int computeHighScore()
+    private int computeCurrentScore()
     {
         int highscore = 0;
 
