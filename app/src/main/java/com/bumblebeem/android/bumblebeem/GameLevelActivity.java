@@ -29,7 +29,7 @@ public class GameLevelActivity extends AppCompatActivity {
     // UI elements
     private ImageView beeSpiner;
     private ListView listView;
-
+    private Animation rotation;
     /* Function that takes as input a ArrayList of Words
      * shuffles the list and randomizes the list */
     public static ArrayList<Word> pickNRandom(ArrayList<Word> lst, int n) {
@@ -62,6 +62,13 @@ public class GameLevelActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                // Everything on screen disappears and the bee spinner appears
+                listView.setVisibility(View.GONE);
+                beeSpiner.setVisibility(View.VISIBLE);
+                // Initialize the animation and start the animation
+                rotation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotation);
+                beeSpiner.startAnimation(rotation);
 
                 new LoadTTS(getApplicationContext(), configureListOfWords(getFile(position),levelArrayList.get(position).getLevelInt()));
 
@@ -178,19 +185,6 @@ public class GameLevelActivity extends AppCompatActivity {
                         textToSpeech.setOnUtteranceProgressListener(new UtteranceProgressListener() {
                             @Override
                             public void onStart(String utteranceId) {
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        // Everything on screen disappears and the bee spinner appears
-                                        listView.setVisibility(View.GONE);
-                                        beeSpiner.setVisibility(View.VISIBLE);
-
-                                        // Initialize the animation and start the animation
-                                        Animation rotation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotation);
-                                        beeSpiner.startAnimation(rotation);
-
-                                    }
-                                });
 
                             }
 

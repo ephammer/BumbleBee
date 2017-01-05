@@ -26,8 +26,14 @@ public class GameFileActivity extends AppCompatActivity {
     // ArrayList of Words that contains the words of the actual game
     public static ArrayList<Word> words;
     private static String SD_DATA_PATH;
+
+    // Countdown Timer
+    CountDownTimer countDownTimer;
+
     // Initialize the index of the current Word that is played in the list of Words
     private int indexOfActualWord = 0;
+
+
     /**
      * Handles playback of all the sound files
      */
@@ -197,7 +203,7 @@ public class GameFileActivity extends AppCompatActivity {
         playWord(words.get(indexOfActualWord).getWord());
 
         // Start CountDownTimer
-        new CountDownTimer(20000, 1000) {
+        countDownTimer =  new CountDownTimer(20000, 1000) {
 
 
             @Override
@@ -282,19 +288,25 @@ public class GameFileActivity extends AppCompatActivity {
     @Override
     public void onPause() {
         releaseMediaPlayer();
+        countDownTimer.cancel();
         super.onPause();
+        finish();
     }
 
     @Override
     public void onStop() {
         releaseMediaPlayer();
+        countDownTimer.cancel();
         super.onStop();
+        finish();
     }
 
     @Override
     protected void onDestroy() {
         releaseMediaPlayer();
+        countDownTimer.cancel();
         super.onDestroy();
+        finish();
     }
 }
 

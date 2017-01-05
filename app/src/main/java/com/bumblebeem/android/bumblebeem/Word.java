@@ -15,6 +15,11 @@ public class Word implements Parcelable
 
     public Word(String word, String playerInput , int level)
     {
+        word.toLowerCase();
+
+        if(playerInput!=null)
+            playerInput.toLowerCase();
+
         this.word = word;
         this.playerInput = playerInput;
         this.level = level;
@@ -46,6 +51,7 @@ public class Word implements Parcelable
 
     public void setPlayerInput(String playerInput)
     {
+        playerInput.toLowerCase();
         this.playerInput = playerInput;
         this.setEqual();
     }
