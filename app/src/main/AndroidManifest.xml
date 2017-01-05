@@ -19,16 +19,20 @@
         <activity
             android:name=".GameActivity"
             android:label="Game">
-<!--
+
+            <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
+            -->
         </activity>
         <activity
             android:name=".ResultsActivity"
             android:label="Results" />
-        <activity android:name=".GameLevelActivity"></activity>
+        <activity android:name=".GameLevelActivity" />
+        <activity android:name=".GameChargerActivity" />
+        <activity android:name=".GameFileActivity"></activity>
     </application>
 
 </manifest>

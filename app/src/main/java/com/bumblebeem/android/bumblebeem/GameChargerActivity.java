@@ -1,8 +1,10 @@
 package com.bumblebeem.android.bumblebeem;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import java.io.File;
@@ -11,22 +13,22 @@ import java.util.Locale;
 
 import static android.content.ContentValues.TAG;
 
-/**
- * Created by ephammer on 21/10/16.
- */
-
-public class LoadTTS {
+public class GameChargerActivity extends AppCompatActivity {
 
     private TextToSpeech textToSpeech;
     private String audioFolderDataPath;
 
-    // Boolean that verifies state of TTS
-    private boolean loadingFinished = false;
+    private ArrayList<Word> words;
 
 
-    public LoadTTS(Context context, ArrayList<Word> words) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_game_charger);
+
+
         // Initialize the data path to the internal memory
-        String SD_DATA_PATH = context.getFilesDir().getAbsolutePath();
+        String SD_DATA_PATH = getApplicationContext().getFilesDir().getAbsolutePath();
 
         // Initialize audio folder where the synthesized audio files are stored
         audioFolderDataPath = SD_DATA_PATH + File.separator + "./audio";
@@ -34,11 +36,12 @@ public class LoadTTS {
 
         // Verifies if folder was created
         if (audioFolder.exists() || audioFolder.mkdirs()) {
-            synthesizeArrayListToFile(context, words);
+            synthesizeArrayListToFile(getApplicationContext(), words);
         } else
             Log.v(TAG, "Error while creating audioFile folder");
 
     }
+
 
     public void synthesizeArrayListToFile(final Context context, final ArrayList<Word> words) {
         textToSpeech = new TextToSpeech(context, new TextToSpeech.OnInitListener() {
@@ -47,8 +50,8 @@ public class LoadTTS {
                 if (status != TextToSpeech.ERROR) {
                     textToSpeech.setLanguage(Locale.US);
 
-                    // Change speed rate of the textToSpeech engine
-                    textToSpeech.setSpeechRate((float)0.5);
+//                    // Change speed rate of the textToSpeech engine
+//                    textToSpeech.setSpeechRate((float)0.5);
 
                     /* For loop that goes trough the whole list
                      * The loop saves each Word in a synthesised audio file
@@ -73,25 +76,23 @@ public class LoadTTS {
                     textToSpeech.setOnUtteranceProgressListener(new UtteranceProgressListener() {
                         @Override
                         public void onStart(String utteranceId) {
-                            loadingFinished = false;
+
                         }
 
                         // Once All the files from the TTS are finished loading onDone is called
                         @Override
                         public void onDone(String utteranceId) {
                             if(words.get(words.size()-1).getWord().equals(utteranceId))
-                            if (textToSpeech != null) {
-                                textToSpeech.stop();
-                                textToSpeech.shutdown();
-                            }
-                            loadingFinished = true;
+                                if (textToSpeech != null) {
+                                    textToSpeech.stop();
+                                    textToSpeech.shutdown();
+                                }
 
 
                         }
 
                         @Override
                         public void onError(String utteranceId) {
-                            loadingFinished = false;
                             Log.v(TAG, "Error during synthesise of files");
                         }
                     });
@@ -100,9 +101,5 @@ public class LoadTTS {
         });
 
 
-    }
-
-    public boolean isLoadingFinished() {
-        return loadingFinished;
     }
 }

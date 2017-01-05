@@ -1,9 +1,12 @@
 package com.bumblebeem.android.bumblebeem;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by n3v10t on 18/09/16.
  */
-public class Word
+public class Word implements Parcelable
 {
     private String word; // String containing the actual word
     private String playerInput; // String containing the players input word
@@ -16,6 +19,25 @@ public class Word
         this.playerInput = playerInput;
         this.level = level;
     }
+
+    protected Word(Parcel in) {
+        word = in.readString();
+        playerInput = in.readString();
+        equal = in.readByte() != 0;
+        level = in.readInt();
+    }
+
+    public static final Creator<Word> CREATOR = new Creator<Word>() {
+        @Override
+        public Word createFromParcel(Parcel in) {
+            return new Word(in);
+        }
+
+        @Override
+        public Word[] newArray(int size) {
+            return new Word[size];
+        }
+    };
 
     public void setWord(String word)
     {
@@ -90,5 +112,24 @@ public class Word
 
     public boolean isEqual() {
         return equal;
+    }
+
+
+    /* Implement the Parcebale Interface*/
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(word);
+        parcel.writeString(playerInput);
+
+        boolean vIn = true;
+        byte vOut = (byte)(vIn?1:0);
+        parcel.writeByte(vOut);
+
+        parcel.writeInt(level);
     }
 }
