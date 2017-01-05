@@ -161,7 +161,7 @@ public class GameLevelActivity extends AppCompatActivity {
 
                         for (int i = 0; i < words.size(); i++) {
                             String wordDataPath = audioFolderDataPath + File.separator
-                                    + words.get(i) + ".ogg";
+                                    + words.get(i).getWord() + ".ogg";
 
                             // Start synthesise of audio file in WAV format
                             Log.v("Synthesize", words.get(i).getWord());
@@ -206,6 +206,7 @@ public class GameLevelActivity extends AppCompatActivity {
                                             // Initialize Intent
                                             Intent intent = new Intent(getApplicationContext(), GameFileActivity.class);
                                             intent.putParcelableArrayListExtra("Words", words);
+                                            intent.putExtra("sdDataPath",SD_DATA_PATH);
                                             // Start next activity with intent
                                             startActivity(intent);
                                         }

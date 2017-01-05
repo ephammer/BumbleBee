@@ -15,8 +15,9 @@ import java.util.ArrayList;
 
 public class ResultsActivity extends AppCompatActivity
 {
-
+    // ArrayList of played words
     private ArrayList<Word> words;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -41,13 +42,7 @@ public class ResultsActivity extends AppCompatActivity
 
         // Set Highscore
         TextView highScoreTextView = (TextView)findViewById(R.id.highscore_text_view);
-        int highscore = 0;
-
-        // Compute highscore
-        for (int i = 0; i < words.size() ; i++) {
-            highscore += words.get(i).score();
-        }
-        highScoreTextView.append(String.valueOf(highscore));
+        highScoreTextView.append(String.valueOf(computeHighScore()));
         highScoreTextView.setTypeface(custom_font);
 
         // Set stats of game
@@ -83,16 +78,22 @@ public class ResultsActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                Intent i = new Intent(ResultsActivity.this,GameActivity.class);
-                Intent intent = getIntent();
-                int levelInt = intent.getIntExtra("level",1);
-                i.putExtra("level",levelInt);
-                String levelFile = intent.getStringExtra("levelString");
-                i.putExtra("levelString",levelFile);
+                Intent i = new Intent(ResultsActivity.this,GameLevelActivity.class);
                 startActivity(i);
                 finish();
             }
         });
+    }
+
+    // Compute highscore
+    private int computeHighScore()
+    {
+        int highscore = 0;
+
+        for (int i = 0; i < words.size() ; i++) {
+            highscore += words.get(i).score();
+        }
+        return  highscore;
     }
 
 }

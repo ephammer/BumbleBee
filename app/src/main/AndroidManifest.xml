@@ -31,7 +31,6 @@
             android:name=".ResultsActivity"
             android:label="Results" />
         <activity android:name=".GameLevelActivity" />
-        <activity android:name=".GameChargerActivity" />
         <activity android:name=".GameFileActivity"></activity>
     </application>
 

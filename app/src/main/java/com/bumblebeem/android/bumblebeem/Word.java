@@ -126,7 +126,7 @@ public class Word implements Parcelable
         parcel.writeString(word);
         parcel.writeString(playerInput);
 
-        boolean vIn = true;
+        boolean vIn = equal;
         byte vOut = (byte)(vIn?1:0);
         parcel.writeByte(vOut);
 

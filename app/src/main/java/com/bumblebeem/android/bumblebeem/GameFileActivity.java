@@ -116,10 +116,7 @@ public class GameFileActivity extends AppCompatActivity {
          * The ArrayList of Words is passed */
         Bundle bundle = getIntent().getExtras();
         words = bundle.getParcelableArrayList("Words");
-
-
-        // Initialize SD_DATA_PATH
-        SD_DATA_PATH = getApplicationContext().getFilesDir().getAbsolutePath();
+        SD_DATA_PATH = bundle.getString("sdDataPath");
 
         // Initialize the different UI Elements
         final ImageButton replayButton = (ImageButton) findViewById(R.id.replay_button);
