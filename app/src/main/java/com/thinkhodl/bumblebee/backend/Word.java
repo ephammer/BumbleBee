@@ -4,10 +4,13 @@ public class Word {
 
     private int mLevel;
     private String mWord;
-    private String mLanguage;
+    private String mLanguage = "english";
     private String mWordID;
 
-    public Word(String mWordID,int mLevel, String mWord) {
+    public Word() {
+    }
+
+    public Word(String mWordID, int mLevel, String mWord) {
         this.mWordID = mWordID;
         this.mLevel = mLevel;
         this.mWord = mWord;
