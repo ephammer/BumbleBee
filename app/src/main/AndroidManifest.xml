@@ -15,7 +15,8 @@
         <activity android:name=".ui.HighScoreActivity"></activity>
         <activity android:name=".ui.ResultsActivity" />
         <activity android:name=".ui.LevelChoiceActivity" />
-        <activity android:name=".ui.GameActivity" />
+        <activity android:name=".ui.GameActivity"
+            android:windowSoftInputMode="stateVisible"/>
         <activity
             android:name=".ui.MainActivity"
             android:label="@string/title_activity_main"

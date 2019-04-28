@@ -1,6 +1,5 @@
 package com.thinkhodl.bumblebee.backend;
 
-import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -8,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.thinkhodl.bumblebee.R;
-import com.thinkhodl.bumblebee.ui.GameActivity;
 
 
 class LevelViewHolder extends RecyclerView.ViewHolder {

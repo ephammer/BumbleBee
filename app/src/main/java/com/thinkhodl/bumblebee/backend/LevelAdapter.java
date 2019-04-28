@@ -8,7 +8,10 @@ import androidx.annotation.NonNull;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.database.DatabaseReference;
 import com.thinkhodl.bumblebee.R;
+
+import javax.net.ssl.SSLSession;
 
 public class LevelAdapter extends FirestoreRecyclerAdapter<Level, LevelViewHolder> {
 
@@ -35,5 +38,6 @@ public class LevelAdapter extends FirestoreRecyclerAdapter<Level, LevelViewHolde
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.level_item, parent, false);
         return new LevelViewHolder(view);
     }
+
 
 }

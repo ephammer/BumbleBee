@@ -166,7 +166,8 @@ public class GameActivity extends AppCompatActivity {
 
         mEditText.requestFocus();
         keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        keyboard.showSoftInput(mEditText, InputMethodManager.SHOW_IMPLICIT);
+        keyboard.showSoftInput(mEditText, InputMethodManager.SHOW_FORCED);
+        showSoftKeyboard(mEditText);
 
         mReplayButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -206,23 +207,28 @@ public class GameActivity extends AppCompatActivity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     // Get input of player of EditText field
-                    mPlayedWordList.add(new PlayedWord(
-                            mWordList.get(indexOfActualWord),
-                            mEditText.getText().toString().trim().toLowerCase()));
+                    String playerImput = mEditText.getText().toString().trim().toLowerCase();
+
+                    // Check if users input is not null
+                    if(playerImput.length()>0){
+                        mPlayedWordList.add(new PlayedWord(
+                                mWordList.get(indexOfActualWord),playerImput));
 
 
-                    if (indexOfActualWord < mWordList.size() - 1) {
-                        // Set entry filed blank
-                        mEditText.setText("");
+                        if (indexOfActualWord < mWordList.size() - 1) {
+                            // Set entry filed blank
+                            mEditText.setText("");
 
-                        // Force keyboard to stay open
-                        keyboard.toggleSoftInput(InputMethodManager.SHOW_FORCED,
-                                InputMethodManager.HIDE_IMPLICIT_ONLY);
+                            // Force keyboard to stay open
+                            keyboard.toggleSoftInput(InputMethodManager.SHOW_FORCED,
+                                    InputMethodManager.HIDE_IMPLICIT_ONLY);
 
-                        // Play next word in list
-                        indexOfActualWord++;
-                        playWord(mWordList.get(indexOfActualWord).getWord());
+                            // Play next word in list
+                            indexOfActualWord++;
+                            playWord(mWordList.get(indexOfActualWord).getWord());
+                        }
                     }
+                    showSoftKeyboard(mEditText);
                     return true;
                 } else
                     return false;
@@ -369,7 +375,7 @@ public class GameActivity extends AppCompatActivity {
     @Override
     public void onPause() {
         super.onPause();
-         relaseTTS();
+        relaseTTS();
 
     }
 
@@ -377,20 +383,25 @@ public class GameActivity extends AppCompatActivity {
     public void onStop() {
         super.onStop();
         relaseTTS();
-        countDownTimer.cancel();
+        stopCountdown();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         relaseTTS();
-        countDownTimer.cancel();
+        stopCountdown();
     }
 
+    public void stopCountdown(){
+        if(countDownTimer!=null)
+            countDownTimer.cancel();
+
+    }
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)
-//                .setIcon(android.R.drawable.ic_dialog_alert)
+                //                .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Ending game")
                 .setMessage("Are you sure you want to end this game?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener()
@@ -403,5 +414,13 @@ public class GameActivity extends AppCompatActivity {
                 })
                 .setNegativeButton("No", null)
                 .show();
+    }
+
+    public void showSoftKeyboard(View view) {
+        if (view.requestFocus()) {
+            InputMethodManager imm = (InputMethodManager)
+                    getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(view, InputMethodManager.HIDE_IMPLICIT_ONLY);
+        }
     }
 }
