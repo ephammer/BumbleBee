@@ -12,11 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.ResultsActivity"></activity>
+        <activity android:name=".ui.HighScoreActivity"></activity>
+        <activity android:name=".ui.ResultsActivity" />
         <activity android:name=".ui.LevelChoiceActivity" />
         <activity android:name=".ui.GameActivity" />
-        <activity android:name=".Main2Activity" />
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".ui.MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -8,7 +8,7 @@
     <ImageView
         android:layout_width="45dp"
         android:layout_height="40dp"
-        android:id="@+id/imageView"
+        android:id="@+id/user_avatar_imageView"
         android:layout_gravity="center"
         android:src="@mipmap/ic_launcher_round"
         android:layout_marginRight="8dp"/>

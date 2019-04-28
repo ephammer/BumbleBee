@@ -1,6 +1,8 @@
 package com.thinkhodl.bumblebee.ui;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.CountDownTimer;
@@ -35,6 +37,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.thinkhodl.bumblebee.R;
+import com.thinkhodl.bumblebee.Utils;
 import com.thinkhodl.bumblebee.backend.Game;
 import com.thinkhodl.bumblebee.backend.PlayedWord;
 import com.thinkhodl.bumblebee.backend.Word;
@@ -44,6 +47,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 
+import static com.thinkhodl.bumblebee.Utils.GAME_DATABASE;
+import static com.thinkhodl.bumblebee.Utils.WORD_DATABASE;
 import static com.thinkhodl.bumblebee.Utils.WORD_LEVEL;
 import static com.thinkhodl.bumblebee.Utils.WORD_WORD;
 
@@ -74,6 +79,10 @@ public class GameActivity extends AppCompatActivity {
 
     // Level
     private int mLevel;
+
+    // Countdown Timer
+    CountDownTimer countDownTimer;
+
     /*
      * UI elements
      */
@@ -107,7 +116,7 @@ public class GameActivity extends AppCompatActivity {
         dataBase = FirebaseFirestore.getInstance();
 
         Intent intent = getIntent();
-        mLevel = intent.getIntExtra("level",1);
+        mLevel = intent.getIntExtra(WORD_LEVEL,1);
 
         loadGame(mLevel);
     }
@@ -116,8 +125,8 @@ public class GameActivity extends AppCompatActivity {
 
         mWordList = new ArrayList<>();
 
-        dataBase.collection("words")
-                .whereEqualTo("level",level)
+        dataBase.collection(WORD_DATABASE)
+                .whereEqualTo(WORD_LEVEL,level)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -142,7 +151,11 @@ public class GameActivity extends AppCompatActivity {
     private void startGame() {
 
         // Randomize the Word list
-        mWordList = pickNRandom(mWordList,30);
+        int sizeWordList = mWordList.size();
+        if(sizeWordList<30)
+            mWordList = pickNRandom(mWordList,sizeWordList);
+        else
+            mWordList = pickNRandom(mWordList,30);
 
         // Initialize word list for user
         mPlayedWordList = new ArrayList<>();
@@ -221,7 +234,7 @@ public class GameActivity extends AppCompatActivity {
 
 
         // Start CountDownTimer
-        new CountDownTimer(20000, 1000) {
+        countDownTimer = new CountDownTimer(20000, 1000) {
 
 
             @Override
@@ -290,30 +303,32 @@ public class GameActivity extends AppCompatActivity {
         // Set countdown TextView to done
         mCountdownTexTView.setText(R.string.done_string);
         */
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        mGame.setUserID(user.getUid());
-        mGame.setPlayedWords(mPlayedWordList);
-        mGame.setDate(new Timestamp(new Date()));
-        dataBase.collection("games")
-                .add(mGame)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
-                        Intent resultsActivity = new Intent(GameActivity.this,ResultsActivity.class);
-                        resultsActivity.putExtra("level",mLevel);
-                        startActivity(resultsActivity);
-                        finish();
+        if(mPlayedWordList.size()!=0) {
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            mGame.setUserID(user.getUid());
+            mGame.setPlayedWords(mPlayedWordList);
+            mGame.setDate(new Timestamp(new Date()));
+            dataBase.collection(GAME_DATABASE)
+                    .add(mGame)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                            Intent resultsActivity = new Intent(GameActivity.this, ResultsActivity.class);
+                            resultsActivity.putExtra(Utils.WORD_LEVEL, mLevel);
+                            startActivity(resultsActivity);
+                            finish();
 
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding document", e);
-                        finish();
-                    }
-                });
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w(TAG, "Error adding document", e);
+                            finish();
+                        }
+                    });
+        }
 
     }
 
@@ -362,13 +377,31 @@ public class GameActivity extends AppCompatActivity {
     public void onStop() {
         super.onStop();
         relaseTTS();
-
+        countDownTimer.cancel();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         relaseTTS();
+        countDownTimer.cancel();
+    }
 
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+//                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Ending game")
+                .setMessage("Are you sure you want to end this game?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+
+                })
+                .setNegativeButton("No", null)
+                .show();
     }
 }

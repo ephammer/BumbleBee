@@ -24,8 +24,8 @@ public class PlayedWord extends Word {
     {
         super(mWord.getWordID(), mWord.getLevel(), mWord.getWord());
         this.mUserInput = mUserInput;
-        this.mResult = (mWord.getWord().equals(mUserInput));
-        mScore = Utils.score(mWord.getWord(),mUserInput,getLevel());
+        this.mResult = (mWord.getWord().trim().equals(mUserInput));
+        mScore = Utils.score(mWord.getWord().trim(),mUserInput,getLevel());
     }
 
     public String getUserInput() {
@@ -50,5 +50,9 @@ public class PlayedWord extends Word {
 
     public void setScore(int mScore) {
         this.mScore = mScore;
+    }
+
+    private void computeScore(){
+
     }
 }

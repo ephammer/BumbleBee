@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,8 +14,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -24,8 +27,21 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.thinkhodl.bumblebee.R;
+import com.thinkhodl.bumblebee.Utils;
 import com.thinkhodl.bumblebee.backend.Game;
 import com.thinkhodl.bumblebee.backend.PlayedWordAdapter;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.thinkhodl.bumblebee.Utils.GAME_DATABASE;
+import static com.thinkhodl.bumblebee.Utils.GAME_TIMESTAMP;
+import static com.thinkhodl.bumblebee.Utils.GAME_USER_ID;
+import static com.thinkhodl.bumblebee.Utils.HIGHSCORE_DATABASE;
+import static com.thinkhodl.bumblebee.Utils.HIGHSCORE_USER;
+import static com.thinkhodl.bumblebee.Utils.HIGHSCORE_TIMESTAMP;
+import static com.thinkhodl.bumblebee.Utils.WORD_LEVEL;
 
 public class ResultsActivity extends AppCompatActivity {
 
@@ -34,6 +50,7 @@ public class ResultsActivity extends AppCompatActivity {
 
     // Firestore Database
     private FirebaseFirestore dataBase;
+    private FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -56,8 +73,8 @@ public class ResultsActivity extends AppCompatActivity {
             {
                 Intent i = new Intent(ResultsActivity.this,GameActivity.class);
                 Intent intent = getIntent();
-                int levelInt = intent.getIntExtra("level",1);
-                i.putExtra("level",levelInt);
+                int levelInt = intent.getIntExtra(WORD_LEVEL,1);
+                i.putExtra(WORD_LEVEL,levelInt);
                 startActivity(i);
                 finish();
             }
@@ -67,10 +84,14 @@ public class ResultsActivity extends AppCompatActivity {
     private void getLastGame(){
 
         // Cloud Firestore Instance
-        dataBase = FirebaseFirestore.getInstance();
+        if(dataBase==null)
+            dataBase = FirebaseFirestore.getInstance();
+        if(user==null)
+            user = FirebaseAuth.getInstance().getCurrentUser();
 
-        dataBase.collection("games")
-                .orderBy("timestamp", Query.Direction.DESCENDING).limit(1)
+        dataBase.collection(GAME_DATABASE)
+                .whereEqualTo(GAME_USER_ID,user.getUid())
+                .orderBy(GAME_TIMESTAMP, Query.Direction.DESCENDING).limit(1)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -88,6 +109,65 @@ public class ResultsActivity extends AppCompatActivity {
                 });
     }
 
+    private void checkHighscore(final int currentScore){
+
+        // Cloud Firestore Instance
+        if(dataBase==null)
+            dataBase = FirebaseFirestore.getInstance();
+        if(user==null)
+            user = FirebaseAuth.getInstance().getCurrentUser();
+
+        DocumentReference docRef = dataBase.collection(Utils.HIGHSCORE_DATABASE).document(user.getUid());
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                        if(currentScore > (int)(long) document.get(Utils.HIGHSCORE_SCORE))
+                            setNewHighScore(currentScore);
+                    } else {
+                        Log.d(TAG, "No such document");
+                        setNewHighScore(currentScore);
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
+
+    }
+
+    private void setNewHighScore(int newHighscore){
+
+        // Cloud Firestore Instance
+        if(dataBase==null)
+            dataBase = FirebaseFirestore.getInstance();
+        if(user==null)
+            user = FirebaseAuth.getInstance().getCurrentUser();
+
+        Map<String, Object> highscore = new HashMap<>();
+        highscore.put(Utils.HIGHSCORE_SCORE, newHighscore);
+        highscore.put(HIGHSCORE_USER, user.getDisplayName());
+        highscore.put(HIGHSCORE_TIMESTAMP,new Timestamp(new Date()));
+
+        dataBase.collection(HIGHSCORE_DATABASE).document(user.getUid())
+                .set(highscore)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error writing document", e);
+                    }
+                });
+    }
+
     private void loadScores(Game lastGame){
 
         // Set Highscore
@@ -100,6 +180,8 @@ public class ResultsActivity extends AppCompatActivity {
         }
         highScoreTextView.append(String.valueOf(highscore));
 
+
+        checkHighscore(highscore);
 
         // Set stats of game
         TextView nbWrongTextView = (TextView)findViewById(R.id.numberOfWrongWords_score_textview);

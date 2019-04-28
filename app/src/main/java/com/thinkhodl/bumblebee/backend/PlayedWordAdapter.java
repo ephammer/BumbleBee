@@ -13,8 +13,6 @@ import com.thinkhodl.bumblebee.R;
 
 import java.util.ArrayList;
 
-import androidx.core.content.ContextCompat;
-
 public class PlayedWordAdapter extends ArrayAdapter<PlayedWord> {
     public PlayedWordAdapter(Context context, ArrayList<PlayedWord> list)
     {
@@ -22,7 +20,7 @@ public class PlayedWordAdapter extends ArrayAdapter<PlayedWord> {
     }
 
     /**
-     * Returns a list item view that displays information about the earthquake at the given position
+     * Returns a list item view that displays information at the given position
      * in the list of words.
      */
     @Override
@@ -53,7 +51,7 @@ public class PlayedWordAdapter extends ArrayAdapter<PlayedWord> {
             inputWord.setTextColor(Color.GREEN);
         else {
             inputWord.setTextColor(Color.RED);
-            ImageView beeIcon = listItemView.findViewById(R.id.imageView);
+            ImageView beeIcon = listItemView.findViewById(R.id.user_avatar_imageView);
         }
 
         // Set rounded corner shape around each item

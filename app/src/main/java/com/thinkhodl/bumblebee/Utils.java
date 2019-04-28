@@ -1,14 +1,30 @@
 package com.thinkhodl.bumblebee;
 
-import com.thinkhodl.bumblebee.backend.Game;
-import com.thinkhodl.bumblebee.backend.PlayedWord;
-
-import java.util.Map;
 
 public class Utils {
 
+    public static String WORD_DATABASE = "words";
     public static String WORD_LEVEL = "level";
     public static String WORD_WORD = "word";
+
+    public static String GAME_DATABASE = "games";
+    public static String GAME_USER_ID = "userID";
+    public static String GAME_TIMESTAMP = "timestamp";
+    public static String GAME_TOTAL_SCORE = "totalScore";
+    public static String GAME_PLAYED_WORDS = "playedWords";
+
+    public static String HIGHSCORE_DATABASE = "highscore";
+    public static String HIGHSCORE_SCORE = "score";
+    public static String HIGHSCORE_USER = "user";
+    public static String HIGHSCORE_TIMESTAMP = "timestamp";
+
+
+    public static String LEVEL_DATABASE = "levels";
+    public static String LEVEL_COEFFICIENT = "coefficient";
+    public static String LEVEL_LEVEL = "level";
+    public static String LEVEL_DESCRIPTION = "description";
+    public static String LEVEL_TITLE = "title";
+
 
     // Computes if two words are equal
     private static int minimum(int a, int b, int c) {
@@ -49,6 +65,5 @@ public class Utils {
         }
 
     }
-
 
 }

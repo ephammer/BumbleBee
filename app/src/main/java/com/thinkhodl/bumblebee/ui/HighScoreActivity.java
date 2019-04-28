@@ -1,13 +1,16 @@
-package com.thinkhodl.bumblebee;
+package com.thinkhodl.bumblebee.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 
-public class Main2Activity extends AppCompatActivity {
+import com.thinkhodl.bumblebee.R;
+
+public class HighScoreActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_high_score);
     }
 }

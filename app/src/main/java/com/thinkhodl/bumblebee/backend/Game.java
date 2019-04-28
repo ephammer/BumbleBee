@@ -55,4 +55,9 @@ public class Game {
     public void setTotalScore(int mTotalScore) {
         this.mTotalScore = mTotalScore;
     }
+
+
+    public void setTimestamp(Timestamp mTimestamp) {
+        this.mTimestamp = mTimestamp;
+    }
 }
