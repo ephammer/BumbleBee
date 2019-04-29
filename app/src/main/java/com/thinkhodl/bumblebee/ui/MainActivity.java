@@ -1,8 +1,10 @@
 package com.thinkhodl.bumblebee.ui;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 
@@ -11,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.thinkhodl.bumblebee.R;
 import com.thinkhodl.bumblebee.ui.fragments.LevelsFragment;
+import com.thinkhodl.bumblebee.ui.fragments.ProfileFragment;
 import com.thinkhodl.bumblebee.ui.fragments.RankingFragment;
 import com.thinkhodl.bumblebee.ui.fragments.StatsFragment;
 
@@ -21,13 +24,9 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -51,6 +50,8 @@ public class MainActivity extends AppCompatActivity
     TextView mUserNameTextView;
 
     DrawerLayout mDrawerLayout;
+
+    NavigationView mNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,16 +68,16 @@ public class MainActivity extends AppCompatActivity
         mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        mUserAvatarImageView = navigationView.getHeaderView(0).findViewById(R.id.user_avatar_imageView);
-        mUserNameTextView = navigationView.getHeaderView(0).findViewById(R.id.user_name_textView);
-        mUserEmailTextView = navigationView.getHeaderView(0).findViewById(R.id.user_email_textView);
+        mNavigationView = (NavigationView) findViewById(R.id.nav_view);
+        mNavigationView.setNavigationItemSelectedListener(this);
+        mUserAvatarImageView = mNavigationView.getHeaderView(0).findViewById(R.id.user_avatar_imageView);
+        mUserNameTextView = mNavigationView.getHeaderView(0).findViewById(R.id.user_name_textView);
+        mUserEmailTextView = mNavigationView.getHeaderView(0).findViewById(R.id.user_email_textView);
         // check if user is logged in
         checkUserLogedIn();
 
-        MenuItem item = navigationView.getMenu().getItem(0);
-        onNavigationItemSelected(item);
+        MenuItem item = mNavigationView.getMenu().getItem(0);
+        onNavigationItemSelected(mNavigationView.getMenu().findItem(R.id.nav_profile));
     }
 
     @Override
@@ -95,13 +96,9 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         FragmentManager fragmentManager = getSupportFragmentManager();
 
+
         switch (item.getItemId()){
             case R.id.nav_speed_game:
-                /*
-                startActivity(new Intent(MainActivity.this, LevelChoiceActivity.class));
-                mDrawerLayout.closeDrawers();
-                return true;
-                */
                 // Insert the fragment by replacing any existing fragment
                 fragmentManager.beginTransaction().replace(R.id.fragment_container,
                         new LevelsFragment()).commit();
@@ -132,7 +129,21 @@ public class MainActivity extends AppCompatActivity
                 mDrawerLayout.closeDrawers();
                 return true;
             case R.id.nav_share: break;
-            case R.id.nav_send: break;
+            case R.id.nav_send:
+                Intent intent = new Intent(this , HighScoreActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.nav_profile:
+                // Insert the fragment by replacing any existing fragment
+                fragmentManager.beginTransaction().replace(R.id.fragment_container,
+                        new ProfileFragment()).commit();
+
+                // set item as selected to persist highlight
+                item.setChecked(true);
+                // close drawer when item is tapped
+                mDrawerLayout.closeDrawers();
+
+                return true;
             case R.id.nav_logout:
                 FirebaseAuth.getInstance().signOut();
                 finish();
@@ -153,7 +164,6 @@ public class MainActivity extends AppCompatActivity
 
             if (resultCode == RESULT_OK) {
                 // Successfully signed in
-//                startActivity(new Intent(this, LevelChoiceActivity.class));
                 setNavHeaderProfileInfo();
 
             } else {
@@ -169,11 +179,18 @@ public class MainActivity extends AppCompatActivity
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String userEmail = user.getEmail();
         String userName = user.getDisplayName();
+        Uri userAvatarURL = user.getPhotoUrl();
         if(userEmail!=null)
             mUserEmailTextView.setText(userEmail);
         else
             mUserEmailTextView.setVisibility(View.INVISIBLE);
         mUserNameTextView.setText(userName);
+
+        if(userAvatarURL!= null)
+            Glide.with(this)
+                    .load(userAvatarURL)
+                    .circleCrop()
+                    .into(mUserAvatarImageView);
     }
 
     private void checkUserLogedIn(){
@@ -235,4 +252,6 @@ public class MainActivity extends AppCompatActivity
     public void setActionBarTitle(String title) {
         getSupportActionBar().setTitle(title);
     }
+
+
 }

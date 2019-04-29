@@ -400,7 +400,7 @@ public class GameActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        new AlertDialog.Builder(this)
+        new AlertDialog.Builder(this,R.style.CustomDialogue)
                 //                .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Ending game")
                 .setMessage("Are you sure you want to end this game?")
@@ -414,6 +414,7 @@ public class GameActivity extends AppCompatActivity {
                 })
                 .setNegativeButton("No", null)
                 .show();
+
     }
 
     public void showSoftKeyboard(View view) {

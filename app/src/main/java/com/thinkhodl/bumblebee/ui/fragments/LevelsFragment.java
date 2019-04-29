@@ -3,14 +3,12 @@ package com.thinkhodl.bumblebee.ui.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -24,7 +22,6 @@ import com.thinkhodl.bumblebee.R;
 import com.thinkhodl.bumblebee.backend.Level;
 import com.thinkhodl.bumblebee.backend.LevelAdapter;
 import com.thinkhodl.bumblebee.ui.GameActivity;
-import com.thinkhodl.bumblebee.ui.LevelChoiceActivity;
 import com.thinkhodl.bumblebee.ui.MainActivity;
 import com.thinkhodl.bumblebee.ui.RecyclerItemClickListener;
 
@@ -95,9 +92,9 @@ public class LevelsFragment extends Fragment {
                         // do whatever
                         Toast.makeText(getContext(),adapter.getItem(position).getTitle(), Toast.LENGTH_SHORT).show();
 //                        Toast.makeText(getContext(), "Clicked", Toast.LENGTH_SHORT).show();
-                        Intent levelOneIntent = new Intent(getContext() , GameActivity.class);
-                        levelOneIntent.putExtra("level", adapter.getItem(position).getLevel());
-                        startActivity(levelOneIntent);
+                        Intent levelIntent = new Intent(getContext() , GameActivity.class);
+                        levelIntent.putExtra("level", adapter.getItem(position).getLevel());
+                        startActivity(levelIntent);
                     }
 
                     @Override public void onLongItemClick(View view, int position) {

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.EditProfileActivity"
+    android:background="@color/colorPrimary">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"/>
+
+    <LinearLayout
+        android:layout_marginTop="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/rounded_corner_only_top">
+
+        <ImageView
+            android:id="@+id/avatar_profile_imageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:elevation="2dp"
+            android:src="@mipmap/ic_launcher_round" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/change_profile_picture_button"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Change Profile Picture" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/name_textinputlayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:hint="Name"
+
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/name_profile_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--<com.google.android.material.textfield.TextInputLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:hint="Username"-->
+        <!--style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/name_textinputlayout"-->
+        <!--android:layout_margin="16dp"-->
+        <!--android:id="@+id/username_textinputlayout"-->
+
+        <!--&gt;-->
+        <!--<com.google.android.material.textfield.TextInputEditText-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:ems="10"-->
+        <!--android:id="@+id/username_profile_editText"-->
+        <!--android:inputType="textPersonName"-->
+
+        <!--/>-->
+        <!--</com.google.android.material.textfield.TextInputLayout>-->
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email_textinputlayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:hint="Email">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email_profile_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_margin="16dp"-->
+    <!--android:orientation="vertical"-->
+    <!--app:layout_constraintTop_toBottomOf="@+id/change_profile_picture_button"-->
+    <!--&gt;-->
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Name"/>-->
+
+    <!--<EditText-->
+    <!--android:padding="-4dp"-->
+    <!--android:id="@+id/name_profile_editText"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:ems="10"-->
+    <!--android:inputType="textPersonName"-->
+    <!--tools:text="@tools:sample/full_names" />-->
+
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Username"/>-->
+    <!--<EditText-->
+    <!--android:id="@+id/editText3"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:ems="10"-->
+    <!--tools:text="@tools:sample/first_names" />-->
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Email"/>-->
+    <!--<EditText-->
+    <!--android:id="@+id/email_profile_editText"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="8dp"-->
+    <!--android:ems="10"-->
+    <!--android:inputType="textEmailAddress"-->
+    <!--tools:text="@tools:sample/first_names"/>-->
+
+    <!--</LinearLayout>-->
+
+</LinearLayout>

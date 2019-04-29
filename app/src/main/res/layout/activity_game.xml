@@ -26,7 +26,8 @@
         android:orientation="vertical"
         android:gravity="center"
         android:id="@+id/game_linear_layout"
-        android:visibility="gone">
+        android:visibility="gone"
+        android:layout_margin="16dp">
 
         <TextView
             android:id="@+id/countdown_textView"
@@ -34,7 +35,8 @@
             android:layout_height="wrap_content"
             android:text="Countdown"
             android:layout_marginBottom="32dp"
-            android:textSize="32sp"/>
+            android:textSize="32sp"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -43,7 +45,8 @@
                 android:id="@+id/replay_button"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Replay"/>
+                android:text="Replay"
+                style="@style/AppTheme.RoundedCornerMaterialButton"/>
             <EditText
                 android:id="@+id/editText"
                 android:layout_width="wrap_content"

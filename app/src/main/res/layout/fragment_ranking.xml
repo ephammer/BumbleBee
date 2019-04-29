@@ -5,12 +5,16 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.RankingFragment"
     android:layout_marginTop="?attr/actionBarSize"
+    android:background="@color/colorPrimary"
+
     >
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/ranking_recyclerView">
+        android:id="@+id/ranking_recyclerView"
+        android:background="@drawable/rounded_corner_only_top">
+
 
     </androidx.recyclerview.widget.RecyclerView>
 
