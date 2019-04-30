@@ -48,7 +48,7 @@ public class PlayedWordAdapter extends ArrayAdapter<PlayedWord> {
         score.setText(String.valueOf(currentWord.getScore()) + " xp");
 
         if(currentWord.getResult())
-            inputWord.setTextColor(Color.GREEN);
+            inputWord.setTextColor(getContext().getResources().getColor(R.color.green));
         else {
             inputWord.setTextColor(Color.RED);
             ImageView beeIcon = listItemView.findViewById(R.id.user_avatar_imageView);

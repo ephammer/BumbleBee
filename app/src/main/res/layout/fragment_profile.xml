@@ -47,7 +47,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -58,22 +58,24 @@
                         android:layout_height="wrap_content"
                         android:background="@color/white"
                         android:layout_marginStart="16dp"
-
+                        android:layout_marginEnd="16dp"
                         >
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:layout_margin="16dp"
                             android:text="@string/total_number_of_games"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/total_number_games_textView"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:layout_margin="16dp"
-                            android:gravity="center_vertical"
+                            android:gravity="center_vertical|end"
                             android:textStyle="bold"
                             tools:text="24" />
                     </LinearLayout>
@@ -90,21 +92,24 @@
                         android:layout_height="wrap_content"
                         android:background="@color/white"
                         android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
                         >
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:layout_margin="16dp"
                             android:text="@string/total_number_of_words"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/total_number_words_textView"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:layout_height="wrap_content"
                             android:layout_margin="16dp"
-                            android:gravity="center_vertical"
+                            android:gravity="center_vertical|end"
                             android:textStyle="bold"
                             tools:text="24" />
                     </LinearLayout>
@@ -114,22 +119,25 @@
                         android:layout_height="wrap_content"
                         android:background="@color/white"
                         android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
 
                         >
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:layout_margin="16dp"
                             android:text="@string/total_number_of_correct_words"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/total_number_correct_words_textView"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:layout_margin="16dp"
-                            android:gravity="center_vertical"
+                            android:gravity="center_vertical|end"
                             android:textStyle="bold"
                             tools:text="24" />
                     </LinearLayout>
@@ -139,24 +147,28 @@
                         android:layout_height="wrap_content"
                         android:background="@color/white"
                         android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
 
                         >
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:layout_margin="16dp"
                             android:text="@string/total_number_of_wrong_words"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/total_number_wrong_words_textView"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:layout_margin="16dp"
-                            android:gravity="center_vertical"
+                            android:gravity="center_vertical|end"
                             android:textStyle="bold"
-                            tools:text="24" />
+                            tools:text="24"
+                            />
                     </LinearLayout>
 
                     <com.github.mikephil.charting.charts.LineChart
@@ -164,6 +176,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="250dp"
                         android:layout_margin="16dp" />
+
+                    <com.github.mikephil.charting.charts.PieChart
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:layout_margin="16dp"
+                        android:id="@+id/pieChart" />
 
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>

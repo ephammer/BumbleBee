@@ -1,12 +1,16 @@
 package com.thinkhodl.bumblebee.ui;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -57,6 +61,17 @@ public class ResultsActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
+
+        Toolbar myChildToolbar =
+                (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myChildToolbar);
+        // Get a support ActionBar corresponding to this toolbar
+        ActionBar ab = getSupportActionBar();
+
+        // Enable the Up button
+//        ab.setDisplayHomeAsUpEnabled(true);
+        ab.setTitle("Results");
+
 
         // Force keyboard to close
         final InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -178,7 +193,7 @@ public class ResultsActivity extends AppCompatActivity {
         for (int i = 0; i < lastGame.getPlayedWords().size() ; i++) {
             highscore += lastGame.getPlayedWords().get(i).getScore();
         }
-        highScoreTextView.append(String.valueOf(highscore));
+        highScoreTextView.append(' ' + String.valueOf(highscore)+ " xp");
 
 
         checkHighscore(highscore);
@@ -214,5 +229,27 @@ public class ResultsActivity extends AppCompatActivity {
 
 
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_game_resulte, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.action_end:
+                finish();
+                break;
+            case android.R.id.home:
+                break;
+        }
+
+        return true;
+
+    }
 }

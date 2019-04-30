@@ -23,14 +23,22 @@ import android.widget.TextView;
 import com.anychart.AnyChartView;
 import com.bumptech.glide.Glide;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -102,6 +110,9 @@ public class ProfileFragment extends Fragment {
     @BindView(R.id.edit_profile_button)
     ImageButton mEditProfileButton;
 
+    @BindView(R.id.pieChart)
+    PieChart pieChart;
+
     private Context mContext;
 
     private int mTotalGamesTotalNb = 0;
@@ -150,7 +161,10 @@ public class ProfileFragment extends Fragment {
         mNameTextView.setText(user.getDisplayName());
 
         if(user.getPhotoUrl()!=null)
-            Glide.with(this).load(user.getPhotoUrl()).circleCrop().into(mAvatarImageView);
+            Glide.with(this).load(user.getPhotoUrl())
+                    .circleCrop()
+                    .placeholder(R.drawable.ic_honey)
+                    .into(mAvatarImageView);
     }
 
 
@@ -203,6 +217,7 @@ public class ProfileFragment extends Fragment {
         List<Entry> entriesGamesNbTotalWords = new ArrayList<Entry>();
         List<Entry> entriesGamesNbWronglWords = new ArrayList<Entry>();
         List<Entry> entriesGamesNbCorrectWords = new ArrayList<Entry>();
+        List<PieEntry> pieChartDataEntry = new ArrayList<PieEntry>();
 
 
         for (int i =  0; i <documentSnapshot.size()  ; ++i) {
@@ -226,10 +241,42 @@ public class ProfileFragment extends Fragment {
             entriesGamesXP.add(new Entry(i+1,tmp.getTotalScore()));
         }
 
+        /*
+        * Pie chart
+        */
+        pieChartDataEntry.add(new PieEntry((float)mTotalGamesTotalCorrectNb/(float)mTotalGamesTotalNb * 100,"Correct Words"));
+        pieChartDataEntry.add(new PieEntry((float)mTotalGamesTotalWrongNb/(float)mTotalGamesTotalNb * 100,"Wrong Words"));
+
+        ArrayList<Integer> pieChartColors = new ArrayList<>();
+        pieChartColors.add(Color.rgb(170,235,102));
+        pieChartColors.add(Color.rgb(255,58,58));
+
+        PieDataSet dataSet = new PieDataSet(pieChartDataEntry,"");
+        dataSet.setColors(pieChartColors);
+        dataSet.setValueLinePart1OffsetPercentage(80.f);
+        dataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+        dataSet.setValueTextSize(10f);
+
+        PieData pieData = new PieData(dataSet);
+        pieData.setValueFormatter(new PercentFormatter());
+        pieChart.setData(pieData);
+//        pieChart.setUsePercentValues(true);
+        pieChart.getDescription().setEnabled(false);
+        pieChart.setEntryLabelColor(R.color.black);
+//        pieChart.setDrawEntryLabels(false);
+        pieChart.setUsePercentValues(true);
+        pieChart.setTouchEnabled(false);
+        pieChart.getLegend().setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+        pieChart.animateXY(2500, 2500);
+
         // Set textViews
         mTotalNumberWordsTextView.setText(String.valueOf(mTotalGamesTotalNb));
         mTotalCorrectWordsTextView.setText(String.valueOf(mTotalGamesTotalCorrectNb));
         mTotalWrongWordsTextView.setText(String.valueOf(mTotalGamesTotalWrongNb));
+
+        /*
+        * Game Xp Linear Chart
+        */
 
         // add entries to dataset
         LineDataSet dataSetGameXP = new LineDataSet(entriesGamesXP, "Game XP");
@@ -261,10 +308,15 @@ public class ProfileFragment extends Fragment {
         mChartXP.setData(lineData);
         mChartXP.animateY(5000);
         mChartXP.animateX(5000);
+        mChartXP.setTouchEnabled(false);
+
+        mChartXP.getLegend().setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
         mChartXP.invalidate();
 
 
-
+        /*
+         * Number of words Linear Chart
+         */
 
         LineDataSet dataSetTotalWords = new LineDataSet(entriesGamesNbTotalWords,"Total nb words");
         // customize dataset
@@ -331,6 +383,8 @@ public class ProfileFragment extends Fragment {
         mChartNbWords.setData(lineData1);
 //        mChartNbWords.animateY(5000);
         mChartNbWords.animateX(500);
+        mChartNbWords.setTouchEnabled(false);
+        mChartNbWords.getLegend().setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
         mChartNbWords.invalidate();
 
     }
@@ -339,7 +393,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        ((MainActivity) getActivity()).setActionBarTitle("Profile");
+        ((MainActivity) getActivity()).setActionBarTitle("Profile & Stats");
     }
 
     @Override

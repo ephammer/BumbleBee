@@ -20,4 +20,7 @@
     <string name="total_number_of_wrong_words">Total number of wrong words:</string>
     <string name="total_number_of_correct_words">Total number of correct words:</string>
     <string name="action_edit_profile">Edit Profile</string>
+    <string name="profile_stats"><![CDATA[Profile & Stats]]></string>
+    <string name="action_close">Close</string>
+    <string name="score">Score: </string>
 </resources>

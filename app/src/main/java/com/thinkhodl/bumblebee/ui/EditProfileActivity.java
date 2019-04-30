@@ -126,7 +126,9 @@ public class EditProfileActivity extends AppCompatActivity {
             Glide.with(mContext)
             .load(mUser.getPhotoUrl())
             .circleCrop()
-            .into(mAvatarImageView);
+                    .placeholder(R.drawable.ic_honey)
+
+                    .into(mAvatarImageView);
     }
 
     private void updateUser(){

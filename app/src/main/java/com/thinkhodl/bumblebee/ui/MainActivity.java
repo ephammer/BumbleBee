@@ -78,14 +78,24 @@ public class MainActivity extends AppCompatActivity
 
         MenuItem item = mNavigationView.getMenu().getItem(0);
         onNavigationItemSelected(mNavigationView.getMenu().findItem(R.id.nav_profile));
+//        onNavigationItemSelected(item);
     }
 
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        MenuItem item = mNavigationView.getMenu().getItem(0);
+
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
+        }
+        else if (fragmentManager.getBackStackEntryCount() != 0) {
+            fragmentManager.popBackStack();
+        } else if(!item.isChecked()){
+            onNavigationItemSelected(item);
+        }
+        else {
             super.onBackPressed();
         }
     }
@@ -130,7 +140,7 @@ public class MainActivity extends AppCompatActivity
                 return true;
             case R.id.nav_share: break;
             case R.id.nav_send:
-                Intent intent = new Intent(this , HighScoreActivity.class);
+                Intent intent = new Intent(this , ResultsActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.nav_profile:
@@ -190,6 +200,7 @@ public class MainActivity extends AppCompatActivity
             Glide.with(this)
                     .load(userAvatarURL)
                     .circleCrop()
+                    .placeholder(R.drawable.ic_honey)
                     .into(mUserAvatarImageView);
     }
 

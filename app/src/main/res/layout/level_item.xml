@@ -41,6 +41,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="@tools:sample/lorem/random"
-        android:maxHeight="60dp"
-        android:id="@+id/level_description_text_view"/>
+        android:id="@+id/level_description_text_view"
+        android:visibility="gone"/>
 </LinearLayout>

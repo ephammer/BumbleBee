@@ -240,7 +240,7 @@ public class GameActivity extends AppCompatActivity {
 
 
         // Start CountDownTimer
-        countDownTimer = new CountDownTimer(20000, 1000) {
+        countDownTimer = new CountDownTimer(60000, 1000) {
 
 
             @Override
@@ -335,6 +335,8 @@ public class GameActivity extends AppCompatActivity {
                         }
                     });
         }
+        else
+            finish();
 
     }
 

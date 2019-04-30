@@ -25,7 +25,6 @@
 
 
         </activity>
-        <activity android:name=".ui.HighScoreActivity" />
         <activity android:name=".ui.ResultsActivity" />
         <activity
             android:name=".ui.GameActivity"
