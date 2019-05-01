@@ -12,7 +12,6 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-    <string name="speed_game">Speed Game</string>
     <string name="action_done">Done</string>
     <string name="action_save">Save</string>
     <string name="total_number_of_words">Total Number of words:</string>
@@ -23,4 +22,10 @@
     <string name="profile_stats"><![CDATA[Profile & Stats]]></string>
     <string name="action_close">Close</string>
     <string name="score">Score: </string>
+    <string name="feedback">Feedback</string>
+    <string name="share">Share</string>
+    <string name="communicate">Communicate</string>
+    <string name="stats">Stats</string>
+    <string name="rankings">Rankings</string>
+    <string name="speed_game">Speed Game</string>
 </resources>

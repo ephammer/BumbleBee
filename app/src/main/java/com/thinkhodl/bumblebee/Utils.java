@@ -12,6 +12,7 @@ public class Utils {
     public static String GAME_TIMESTAMP = "timestamp";
     public static String GAME_TOTAL_SCORE = "totalScore";
     public static String GAME_PLAYED_WORDS = "playedWords";
+    public static final String GAME_ID = "gameID";
 
     public static String HIGHSCORE_DATABASE = "highscore";
     public static String HIGHSCORE_SCORE = "score";

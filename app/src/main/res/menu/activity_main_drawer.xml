@@ -6,16 +6,16 @@
         <item
             android:id="@+id/nav_speed_game"
             android:icon="@drawable/ic_stopwatch"
-            android:title="Speed Game" />
+            android:title="@string/speed_game" />
         <item
             android:id="@+id/nav_rankings"
             android:icon="@drawable/ic_ranking"
-            android:title="Rankings" />
+            android:title="@string/rankings" />
 
         <item
             android:id="@+id/nav_stats"
             android:icon="@drawable/ic_graph"
-            android:title="Stats" />
+            android:title="@string/stats" />
         <!--<item android:title="" android:checkable="false"/>-->
         <item
             android:id="@+id/nav_profile"
@@ -23,16 +23,16 @@
             android:title="@string/profile_stats" />
     </group>
 
-        <item android:title="Communicate">
+        <item android:title="@string/communicate">
             <menu>
                 <item
                     android:id="@+id/nav_share"
                     android:icon="@drawable/ic_menu_share"
-                    android:title="Share" />
+                    android:title="@string/share" />
                 <item
                     android:id="@+id/nav_send"
                     android:icon="@drawable/ic_menu_send"
-                    android:title="Send" />
+                    android:title="@string/feedback" />
             </menu>
         </item>
 

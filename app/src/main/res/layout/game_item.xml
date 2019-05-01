@@ -3,8 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="16dp">
+    android:layout_margin="16dp"
+    android:focusable="true"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:orientation="vertical">
 
+
+    <LinearLayout
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -37,7 +46,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         tools:text="12"
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:textColor="@android:color/holo_green_dark"
         />
     <TextView
@@ -46,7 +55,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         tools:text="12"
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:textColor="@android:color/holo_red_dark"
         />
     <TextView
@@ -55,7 +64,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         tools:text="12"
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:textStyle="bold"
         />
     <TextView
@@ -66,5 +75,13 @@
         tools:text="123xp"
         android:gravity="end|center_vertical"
         />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorDivider"/>
+
 </LinearLayout>
 

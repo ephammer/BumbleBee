@@ -8,12 +8,29 @@
     android:background="@color/colorPrimary"
     >
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/rounded_corner_only_top"
+        >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Choose your next game level:"
+        android:textColor="@color/colorSecondaryText"
+        android:layout_margin="16dp"
+        android:textStyle="bold"
+        />
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/levels_recyclerView"
-        android:background="@drawable/rounded_corner_only_top">
+        >
 
     </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+
 
 </FrameLayout>

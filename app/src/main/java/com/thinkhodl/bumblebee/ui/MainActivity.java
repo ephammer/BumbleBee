@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity
         checkUserLogedIn();
 
         MenuItem item = mNavigationView.getMenu().getItem(0);
-        onNavigationItemSelected(mNavigationView.getMenu().findItem(R.id.nav_profile));
+        onNavigationItemSelected(mNavigationView.getMenu().findItem(R.id.nav_stats));
 //        onNavigationItemSelected(item);
     }
 
@@ -138,11 +138,25 @@ public class MainActivity extends AppCompatActivity
                 // close drawer when item is tapped
                 mDrawerLayout.closeDrawers();
                 return true;
-            case R.id.nav_share: break;
+            case R.id.nav_share:
+                Intent shareLinkIntent = new Intent(Intent.ACTION_SEND);
+                shareLinkIntent.setType("text/plain");
+                shareLinkIntent.putExtra(Intent.EXTRA_SUBJECT,
+                        "Take a look at this amazing game");
+                shareLinkIntent.putExtra(Intent.EXTRA_TEXT,
+                        "Take a look at this amazing game!\n\n" +
+                                "https://play.google.com/store/apps/details?id=com.thinkhodl.bumblebee");
+                startActivity(Intent.createChooser(shareLinkIntent, "Share the Game"));
+                break;
             case R.id.nav_send:
-                Intent intent = new Intent(this , ResultsActivity.class);
-                startActivity(intent);
-                return true;
+//                Intent intent = new Intent(this , ResultsActivity.class);
+//                startActivity(intent);
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setType("message/rfc822");
+                intent.setData(Uri.parse("mailto:contact@thinkhodl.com"));
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Feedback BumbleBee app");
+                startActivity(Intent.createChooser(intent, "Contact"));
+                break;
             case R.id.nav_profile:
                 // Insert the fragment by replacing any existing fragment
                 fragmentManager.beginTransaction().replace(R.id.fragment_container,

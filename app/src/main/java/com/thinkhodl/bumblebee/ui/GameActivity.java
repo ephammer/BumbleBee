@@ -322,6 +322,9 @@ public class GameActivity extends AppCompatActivity {
                             Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
                             Intent resultsActivity = new Intent(GameActivity.this, ResultsActivity.class);
                             resultsActivity.putExtra(Utils.WORD_LEVEL, mLevel);
+                            resultsActivity.putExtra(Utils.GAME_ID,
+                                    dataBase.collection(GAME_DATABASE).document(documentReference.getId()).getId());
+
                             startActivity(resultsActivity);
                             finish();
 
