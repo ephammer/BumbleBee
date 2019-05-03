@@ -140,7 +140,7 @@ public class StatsFragment extends Fragment {
     public void onStart() {
         super.onStart();
         adapter.startListening();
-        ((MainActivity) getActivity()).setActionBarTitle("Game stats");
+        ((MainActivity) getActivity()).setActionBarTitle("Game History");
 
     }
 

@@ -73,7 +73,7 @@
                 android:ems="10"
                 android:inputType="textNoSuggestions|textVisiblePassword"
                 android:gravity="center"
-                android:layout_gravity="center_horizontal"/>
+                />
 
             <Button
                 android:id="@+id/skip_button"

@@ -26,8 +26,10 @@ public class HighScoreAdapter extends FirestoreRecyclerAdapter<HighScore,HighSco
 
     @Override
     protected void onBindViewHolder(@NonNull HighScoreViewHolder highScoreViewHolder, int i, @NonNull HighScore highScore) {
+
         highScoreViewHolder.setHighScoreName(highScore.getUser());
         highScoreViewHolder.setHighScoreScore(String.valueOf(highScore.getScore()));
+        highScoreViewHolder.setHighScoreIcon(i+1);
     }
     @NonNull
     @Override

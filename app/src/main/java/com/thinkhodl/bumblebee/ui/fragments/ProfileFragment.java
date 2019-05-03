@@ -163,7 +163,7 @@ public class ProfileFragment extends Fragment {
         if(user.getPhotoUrl()!=null)
             Glide.with(this).load(user.getPhotoUrl())
                     .circleCrop()
-                    .placeholder(R.drawable.ic_honey)
+                    .placeholder(R.drawable.ic_bee_hexagonal_logo)
                     .into(mAvatarImageView);
     }
 
@@ -401,5 +401,15 @@ public class ProfileFragment extends Fragment {
         super.onStop();
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        loadProfileInfo();
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadProfileInfo();
+    }
 }

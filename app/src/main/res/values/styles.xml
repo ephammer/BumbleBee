@@ -1,5 +1,7 @@
 <resources>
 
+
+
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
@@ -9,6 +11,13 @@
         <item name="android:statusBarColor">@color/colorPrimaryDark</item>
         <!--<item name="android:textColor">@color/colorSecondaryDark</item>-->
 
+    </style>
+
+    <style name="FirebaseUI" parent="AppTheme">
+
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
     </style>
 
     <style name="CustomDialogue" parent="Theme.MaterialComponents.Dialog">
@@ -53,4 +62,5 @@
         <item name="android:paddingEnd">8dp</item>
         <item name="android:background">@drawable/rounded_shape</item>
     </style>
+
 </resources>

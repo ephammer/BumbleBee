@@ -1,9 +1,5 @@
 package com.thinkhodl.bumblebee.ui;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -18,6 +14,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.bumptech.glide.Glide;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -27,6 +27,7 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 import com.thinkhodl.bumblebee.R;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -87,7 +88,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 // start picker to get image for cropping and then use the image in cropping activity
                 CropImage.activity()
                         .setGuidelines(CropImageView.Guidelines.ON)
-                        .setMinCropResultSize(100,100)
+                        .setMinCropResultSize(100, 100)
                         .setCropShape(CropImageView.CropShape.OVAL)
                         .setFixAspectRatio(true)
                         .start((Activity) mContext);
@@ -95,7 +96,10 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
+
     @Override
     protected void onActivityResult(int requestCode, final int resultCode, Intent data) {
 
@@ -113,41 +117,41 @@ public class EditProfileActivity extends AppCompatActivity {
 
     }
 
-    private void loadUserInfo(){
+    private void loadUserInfo() {
         // Get user from firebase
         firebaseAuth = FirebaseAuth.getInstance();
         mUser = firebaseAuth.getCurrentUser();
 
-        if(mUser.getDisplayName()!=null)
+        if (mUser.getDisplayName() != null)
             mNameEditText.setText(mUser.getDisplayName());
-        if(mUser.getEmail()!=null)
+        if (mUser.getEmail() != null)
             mEmailEditText.setText(mUser.getEmail());
-        if(mUser.getPhotoUrl()!=null)
+        if (mUser.getPhotoUrl() != null)
             Glide.with(mContext)
-            .load(mUser.getPhotoUrl())
-            .circleCrop()
-                    .placeholder(R.drawable.ic_honey)
+                    .load(mUser.getPhotoUrl())
+                    .circleCrop()
+                    .placeholder(R.drawable.ic_bee_hexagonal_logo)
 
                     .into(mAvatarImageView);
     }
 
-    private void updateUser(){
+    private void updateUser() {
 
         UserProfileChangeRequest profileUpdates = null;
 
-        if(mAvatarUri!=null && TextUtils.isEmpty(mNameEditText.getText()))
+        if (mAvatarUri != null && TextUtils.isEmpty(mNameEditText.getText()))
             profileUpdates = new UserProfileChangeRequest.Builder()
-                .setPhotoUri(mAvatarUri)
-                .build();
-        else if(mAvatarUri != null && !TextUtils.isEmpty(mNameEditText.getText()))
+                    .setPhotoUri(mAvatarUri)
+                    .build();
+        else if (mAvatarUri != null && !TextUtils.isEmpty(mNameEditText.getText()))
             profileUpdates = new UserProfileChangeRequest.Builder()
                     .setPhotoUri(mAvatarUri)
                     .setDisplayName(mNameEditText.getText().toString())
                     .build();
 
-        if(TextUtils.isEmpty(mEmailEditText.getText()))
+        if (TextUtils.isEmpty(mEmailEditText.getText()))
             mEmailEditText.setError("This field is mandatory");
-        else if(!mEmailEditText.getText().equals(mUser.getEmail()))
+        else if (!mEmailEditText.getText().equals(mUser.getEmail()))
             mUser.updateEmail(mEmailEditText.getText().toString());
 
         /*
@@ -155,19 +159,18 @@ public class EditProfileActivity extends AppCompatActivity {
             mUsernameEditText.setError("This field is mandatory");
 
         */
-        if(profileUpdates!=null)
+        if (profileUpdates != null)
             mUser.updateProfile(profileUpdates);
 
-        Toast.makeText(this,"Saved",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
     }
 
-    void confirmCancel(){
-        new AlertDialog.Builder(this,R.style.CustomDialogue)
+    void confirmCancel() {
+        new AlertDialog.Builder(this, R.style.CustomDialogue)
                 //                .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Cancel edit")
                 .setMessage("Are you sure you want to leave the profile edit? \n Unsaved changes will be lost.")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
-                {
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         finish();
@@ -197,7 +200,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 break;
             case android.R.id.home:
                 confirmCancel();
-//                NavUtils.navigateUpFromSameTask(this);
+                //                NavUtils.navigateUpFromSameTask(this);
                 break;
         }
 
