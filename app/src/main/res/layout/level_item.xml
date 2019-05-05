@@ -1,29 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginTop="16dp"
+    android:focusable="true"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:background="@drawable/rounded_corner"
+    android:elevation="2dp"
     android:padding="16dp"
-    android:elevation="1dp">
-
-
-    <ImageView
-        android:id="@+id/level_item_image_view"
-        android:layout_width="0dp"
-        android:layout_height="52dp"
-        android:layout_weight="0.17"
-        android:src="@drawable/bee_icon"
-        android:gravity="center_vertical"/>
-
-    <TextView
-        android:id="@+id/level_text_view"
-        android:layout_width="0dp"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.9"
-        android:gravity="center_vertical"
-        android:paddingLeft="16dp"
-        android:text="Level 3"
-        android:textSize="24sp"
-        android:textColor="@color/colorPrimaryText"
-        />
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="start"
+            tools:text="Title"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:id="@+id/level_title_text_view"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            tools:text="Level"
+            android:id="@+id/level_level_text_view"/>
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="@tools:sample/lorem/random"
+        android:id="@+id/level_description_text_view"
+        android:visibility="gone"/>
 </LinearLayout>

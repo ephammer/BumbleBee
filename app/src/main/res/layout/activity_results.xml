@@ -1,47 +1,52 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    android:background="#EEEEEE"
     android:orientation="vertical"
-    tools:context="com.bumblebeem.android.bumblebeem.ResultsActivity">
-
+    android:background="@color/colorPrimary"
+    >
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
-        android:elevation="4dp">
+        android:elevation="4dp"
+        android:background="@drawable/rounded_corner_only_top"
+        >
 
         <LinearLayout
             android:id="@+id/linearLayout2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <TextView
-                android:id="@+id/results_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/results"
-                android:textSize="54sp"
-                android:textStyle="bold" />
+            <!--<TextView-->
+                <!--android:id="@+id/results_text_view"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/results"-->
+                <!--android:textSize="54sp"-->
+                <!--android:textStyle="bold" />-->
 
-            <ImageView
-                android:id="@+id/bee_imageView"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="-20dp"
-                android:adjustViewBounds="true"
-                android:background="@drawable/bee_icon" />
+            <!--<ImageView-->
+                <!--android:id="@+id/bee_imageView"-->
+                <!--android:layout_width="50dp"-->
+                <!--android:layout_height="50dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:adjustViewBounds="true"-->
+                <!--android:background="@mipmap/ic_launcher_round"-->
+                <!--android:layout_margin="4dp"/>-->
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/black" />
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="@color/black" />-->
+
 
             <TextView
                 android:id="@+id/highscore_text_view"
@@ -49,10 +54,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:paddingBottom="8dp"
-                android:text="High Score: "
-                android:textColor="@color/colorSecondaryText"
+                android:text="@string/score"
                 android:textSize="24sp"
-                android:textStyle="italic" />
+                android:textStyle="italic|bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -61,14 +65,18 @@
                 android:orientation="vertical"
                 android:paddingBottom="8dp">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/black" />
+                <!--<View-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="1dp"-->
+                    <!--android:background="@color/colorDivider"-->
+                    <!--android:elevation="2dp"/>-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:paddingBottom="8dp"
+                    >
 
                     <TextView
                         android:id="@+id/numberOfWrongWords_textview"
@@ -78,7 +86,6 @@
                         android:layout_weight="1"
                         android:fontFamily="sans-serif-condensed"
                         android:text="Nb. of wrong words: "
-                        android:textColor="@color/colorSecondaryText"
                         android:textStyle="bold" />
 
                     <TextView
@@ -88,7 +95,6 @@
                         android:layout_gravity="right|end"
                         android:fontFamily="sans-serif-condensed"
                         android:text="0"
-                        android:textColor="@color/colorPrimaryText"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -104,7 +110,6 @@
                         android:layout_weight="1"
                         android:fontFamily="sans-serif-condensed"
                         android:text="Nb. of correct words: "
-                        android:textColor="@color/colorSecondaryText"
                         android:textStyle="bold" />
 
                     <TextView
@@ -114,19 +119,18 @@
                         android:layout_gravity="right|end"
                         android:fontFamily="sans-serif-condensed"
                         android:text="0"
-                        android:textColor="@color/colorPrimaryText"
                         android:textStyle="bold" />
                 </LinearLayout>
 
                 <Button
                     android:id="@+id/play_again_button"
                     style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:paddingTop="8dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
                     android:text="@string/play_again" />
-                />
             </LinearLayout>
 
         </LinearLayout>
@@ -136,18 +140,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:background="@color/white">
 
         <ListView
             android:id="@+id/results_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#EEEEEE"
-            android:divider="@android:color/transparent"
-            android:dividerHeight="5.0sp"
+            android:divider="@drawable/divider"
+            android:dividerHeight="1dp"
             android:drawSelectorOnTop="true"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin" />
+            />
     </LinearLayout>
 
 </LinearLayout>
