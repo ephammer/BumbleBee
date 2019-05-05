@@ -14,11 +14,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,6 +30,8 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 import com.thinkhodl.bumblebee.R;
+
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -139,30 +144,46 @@ public class EditProfileActivity extends AppCompatActivity {
 
         UserProfileChangeRequest profileUpdates = null;
 
-        if (mAvatarUri != null && TextUtils.isEmpty(mNameEditText.getText()))
+        if (mAvatarUri != null && TextUtils.isEmpty(mNameEditText.getText())) {
+            mNameEditText.setError("This field is mandatory");
             profileUpdates = new UserProfileChangeRequest.Builder()
                     .setPhotoUri(mAvatarUri)
                     .build();
-        else if (mAvatarUri != null && !TextUtils.isEmpty(mNameEditText.getText()))
+        }
+        else if (mAvatarUri != null && !TextUtils.isEmpty(mNameEditText.getText())) {
             profileUpdates = new UserProfileChangeRequest.Builder()
                     .setPhotoUri(mAvatarUri)
                     .setDisplayName(mNameEditText.getText().toString())
                     .build();
+        }else if(mAvatarUri == null &&TextUtils.isEmpty(mNameEditText.getText())) {
+            mNameEditText.setError("This field is mandatory");
+        }else if (mAvatarUri == null && !(mNameEditText.getText().equals(mUser.getDisplayName()))){
+            profileUpdates = new UserProfileChangeRequest.Builder()
+                    .setDisplayName(mNameEditText.getText().toString())
+                    .build();
+        }
 
         if (TextUtils.isEmpty(mEmailEditText.getText()))
             mEmailEditText.setError("This field is mandatory");
         else if (!mEmailEditText.getText().equals(mUser.getEmail()))
             mUser.updateEmail(mEmailEditText.getText().toString());
 
-        /*
-        if(TextUtils.isEmpty(mUsernameEditText.getText()))
-            mUsernameEditText.setError("This field is mandatory");
 
-        */
-        if (profileUpdates != null)
-            mUser.updateProfile(profileUpdates);
 
-        Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
+
+
+        if (profileUpdates != null) {
+            Toast.makeText(this, "Saving...", Toast.LENGTH_SHORT).show();
+
+            mUser.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            });
+        }
+
     }
 
     void confirmCancel() {
@@ -196,7 +217,6 @@ public class EditProfileActivity extends AppCompatActivity {
         switch (id) {
             case R.id.action_save:
                 updateUser();
-                finish();
                 break;
             case android.R.id.home:
                 confirmCancel();
