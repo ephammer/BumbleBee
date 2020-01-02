@@ -12,3 +12,9 @@ Spelling bee game for Android
 #### Advanced Stats
 
 ![Advanced Stats](https://user-images.githubusercontent.com/17436690/71664326-458a7180-2d61-11ea-8984-3dc1aa6ff5bf.jpeg)
+#### Game History
+![Screenshot_20200102-131617__01](https://user-images.githubusercontent.com/17436690/71664665-6dc6a000-2d62-11ea-8ff2-7a6ed2bce1b0.jpg)
+
+#### Game Rankings
+![Game Rankings ](https://user-images.githubusercontent.com/17436690/71664641-51c2fe80-2d62-11ea-9311-45b16a410da0.jpg)
+
